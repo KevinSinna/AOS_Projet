@@ -101,4 +101,5 @@ app.put("/client", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  console.log(`http://localhost:5000/api-docs/#/`);
 });
