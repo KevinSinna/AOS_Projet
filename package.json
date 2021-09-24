@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
     "client": "nodemon clients/clients.js",
-    "prestataire": "",
-    "start": "concurrently \"nodemon Prestataires/Prestataires.js\" \"nodemon clients/clients.js\" "
+    "prestataire": "nodemon Prestataires/Prestataires.js",
+    "start": "concurrently \"npm run client\" \"npm run prestataire\" "
   },
   "author": "Evry",
   "license": "ISC",
