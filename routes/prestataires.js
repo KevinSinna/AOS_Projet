@@ -24,7 +24,7 @@ const modelPrestataires= require('../models/prestataires')
 /**
  * @swagger
  * tags:
- *  name: Prestations
+ *  name: Prestatataires
  *  descritpions: Route API de la ressource Prestataires
  */
 
