@@ -8,13 +8,14 @@
     "dev": "node server.js",
     "client": "nodemon clients/clients.js",
     "prestataire": "",
-    "start": "nodemon clients/clients.js & nodemon Prestataires/Prestataires.js "
+    "start": "concurrently \"nodemon Prestataires/Prestataires.js\" \"nodemon clients/clients.js\" "
   },
   "author": "Evry",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.4",
     "body-parser": "^1.19.0",
+    "concurrently": "^6.2.1",
     "express": "^4.17.1",
     "mongodb": "^4.1.1",
     "mongoose": "^6.0.7",
