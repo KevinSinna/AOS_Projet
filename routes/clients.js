@@ -1,26 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const app = require("../app");
 
-const Client = require("../models/Client");
+const Test = require("../models/client");
+let db = mongoose.connection;
 
-router.get("/", (req, res, next) => {
-  Client.find()
-    .exec()
-    .then(docs => {
-      console.log(docs);
-      //   if (docs.length >= 0) {
-      res.status(200).json(docs);
-      //   } else {
-      //       res.status(404).json({
-      //           message: 'No entries found'
-      //       });
-      //   }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
+router.get("/clients", function(req, res, next){
+  res.send({type:'GET'});
+    // Client.find({}).then(function(clients){
+    //     res.send(clients);
+    // })
 });
+
+// router.get('/z', async (req, res) => {
+//     const platforms = await Test.find();
+//     res.send(platforms);
+// });
+router.get("/z", function(req, res) {
+    var groupe = db
+      .collection("Client")
+      .find({})
+      .toArray(function(err, data) {
+        res.send(data);
+      });
+  });
+module.exports = router;

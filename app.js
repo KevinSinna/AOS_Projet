@@ -3,13 +3,18 @@ const app = express();
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
+const router = express.Router();
+
 const port = process.env.PORT || 5000;
-const Mongoose = require("mongoose");
+const mongoose = require("mongoose");
+// const clientRoutes = require("./routes/clients");
+const Client = require("./models/client");
 
-const Client = require("./models/Client");
 
-Mongoose.connect("mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/").then(() => console.log("Connexion à MongoDB réussie !"))
+
+mongoose.connect("mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/").then(() => console.log("Connexion à MongoDB réussie !"))
 .catch(() => console.log("Connexion à MongoDB échouée !"));
+
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -60,25 +65,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *        description: A successful response
  */
 app.get("/clients", (req, res) => {
-  Client.find()
-  .exec()
-  .then(docs => {
-    console.log(docs);
-    //   if (docs.length >= 0) {
-    res.status(200).json(docs);
-    //   } else {
-    //       res.status(404).json({
-    //           message: 'No entries found'
-    //       });
-    //   }
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error: err
-    });
-  });
-  // res.status(200).send("Customer results");
+  res.status(200).send("Customer results");
 });
 
 /**
@@ -122,7 +109,11 @@ app.put("/client", (req, res) => {
     res.status(200).send("Successfully updated client");
   });
 
+ 
+  
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
   console.log(`http://localhost:5000/api-docs/`);
 });
+
+module.exports = app;
