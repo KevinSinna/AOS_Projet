@@ -41,6 +41,11 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 /**
  * @swagger
  * tags:
+ *      name: test
+ */
+/**
+ * @swagger
+ * tags:
  *      name: client
  */
 /**
