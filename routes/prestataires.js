@@ -1,7 +1,7 @@
 const express = require("express");
 const prestataires = require("../models/prestataires");
 const router = express.Router()
-const modelPrestataires= require('../models/prestataires')
+const modelPrestataires = require('../models/prestataires')
 
 /**
  * @swagger
@@ -28,7 +28,8 @@ const modelPrestataires= require('../models/prestataires')
  *  descritpions: Route API de la ressource Prestataires
  */
 
-router.get("/", async (req, res) => {
+//Selectionner tout les prestataires
+router.get('/', async (req, res) => {
     try{
         const prestataires = await modelPrestataires.find();
         res.status(201).json(prestataires);
@@ -37,28 +38,55 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", (req, res) =>{
-    //Affiche un prestataire (avoir le détail)
+//Selectionner un seul prestataire
+router.get('/:id', async (req, res) =>{
     try {
-        res.status(200).json(modelPrestataires)
+        const prestataire = await modelPrestataires.findById(req.params.id);
+        res.status(200).json(prestataire)
     } catch (err) {
         res.send(err)
     }
 })
 
-router.put("/", (req, res) => {
-    //ajoute un prestataire
-    res.status(200)
+//créer un prestataire
+router.post("/", async (req, res) => {
+    const prestataire = new modelPrestataires({
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        code_postale: req.body.code_postale,
+        service: req.body.service
+    })
+    try{
+        const newPrestaire = await prestataire.save();
+        res.status(200).json(newPrestaire)
+    }catch(err){
+        res.send(err)
+    }
 })
 
-router.post("/:id", (req, res) => {
-    // on va aller chercher l'élément et modifier un ou plusieurs éléments
-    res.status(200).send(console.log("Information mise à jour"))
+router.put("/:id",async (req, res) => {
+//Mise a jour des informations
+    try{
+        await modelPrestataires.updateOne(
+            {_id: req.params.id},
+            {$set: {nom: req.body.nom ,
+            prenom: req.body.prenom ,
+            code_postale: req.body.code_postale ,
+            service: req.body.service}}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
 })
 
-router.delete("/:id", (req, res) => {
-    //const prestataire = requette
-    res.send(console.log("Prestataire Supprimé"))
+router.delete("/:id",async (req, res) => {
+try{
+    await modelPrestataires.deleteOne({_id:req.params.id})
+    res.send()
+}catch(err){
+    res.send(err)
+}
 })
 
 module.exports = router;
