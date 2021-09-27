@@ -31,7 +31,7 @@ const modelPrestataires = require('../models/prestataires')
 //Selectionner tout les prestataires
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find();
+        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postale','service']);
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
