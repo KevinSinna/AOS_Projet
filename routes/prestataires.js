@@ -64,21 +64,20 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.put("/:id", (req, res) => {
-/*Mise a jour des informations
+router.put("/:id",async (req, res) => {
+//Mise a jour des informations
     try{
-        await modelPrestataires.updateOne(
+        const prestataire = await modelPrestataires.updateOne(
             {_id: req.params.id},
-            if(nom!=null){
-
-            }
-            {$set: {}
-            }
-        )
-        res.send()
+            {$set: {nom: req.body.nom ,
+            prenom: req.body.prenom ,
+            code_postale: req.body.code_postale ,
+            service: req.body.service}}
+        );
+        res.send();
     }catch(err){
         res.send(err)
-    }*/
+    }
 })
 
 router.delete("/:id",async (req, res) => {
