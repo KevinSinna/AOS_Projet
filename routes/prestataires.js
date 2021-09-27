@@ -83,7 +83,7 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id",async (req, res) => {
 try{
-    await modelPrestataires.findById(req.params.id).remove()
+    await modelPrestataires.deleteOne({_id:req.params.id})
     res.send()
 }catch(err){
     res.send(err)
