@@ -15,7 +15,7 @@ const prestatairesSchema = new mongoose.Schema({
   },
   service:{
     type:[String],
-    require:false
+    require:true
   }
 })
 
