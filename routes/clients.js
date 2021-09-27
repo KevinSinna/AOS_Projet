@@ -1,4 +1,5 @@
 const express = require("express");
+const { ClientSession } = require("mongodb");
 // const clients = require("../models/clients");
 const router = express.Router()
 const modelclients = require('../models/client')
@@ -39,22 +40,24 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.put("/:id", (req, res) => {
-/*Mise a jour des informations
-    try{
-        await modelclients.updateOne(
-            {_id: req.params.id},
-            if(nom!=null){
-            }
-            {$set: {}
-            }
-        )
-        res.send()
-    }catch(err){
-        res.send(err)
-    }*/
-})
 
+router.put("/:id",async (req, res) => {
+  //Mise a jour des informations
+      try{
+           await modelclients.updateOne(
+              {_id: req.params.id},
+              {$set: {
+                nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              code_postale: req.body.code_postale
+            }}
+          );
+          res.send();
+      }catch(err){
+          res.send(err)
+      }
+  })
+  
 router.delete("/:id",async (req, res) => {
 try{
     await modelclients.deleteOne({_id:req.params.id})
