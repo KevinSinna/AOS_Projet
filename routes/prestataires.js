@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
     try{
-        const prestataire = await modelPrestataires.updateOne(
+        await modelPrestataires.updateOne(
             {_id: req.params.id},
             {$set: {nom: req.body.nom ,
             prenom: req.body.prenom ,
