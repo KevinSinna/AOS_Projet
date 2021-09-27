@@ -1,25 +1,18 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require ('mongoose')
 
-// const clientSchema = new Schema({
-//     // _id: mongoose.Types.ObjectId,
-//     ID: String,
-//     DATE_INSCRIPTION: String,
-//     NOM: String,
-//     PRENOM: String,
-//     PSEUDO: String,
-//     DATE_DE_NAISSANCE: String,
-//     ADRESSE: String,
-//     VILLE: String,
-//     CODE_POSTAL: String
-// });
+const clientSchema = new mongoose.Schema({
+  nom:{
+    type: String,
+    require:true
+  },
+  prenom:{
+    type:String,
+    require:true
+  },
+  code_postale:{
+    type: Number,
+    require:true
+  }
+})
 
-// const Client = mongoose.model('Client',clientSchema);
-const testSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
-    NOM : String
-});
-const conn = mongoose.createConnection("mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/User");
-
-const Test = conn.model('test',testSchema);
-module.exports = Test;
+module.exports = mongoose.model('Clients',clientSchema,"Client")
