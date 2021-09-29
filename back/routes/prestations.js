@@ -22,10 +22,10 @@ const modelprestations = require('../models/prestation')
  *           description: Numéro d'identifiant prestation auto généré 
  *         ClientID:
  *           type: ObjectId
- *           description: Nom d'un prestation
+ *           description: Id d'un client
  *         prestationsID:
  *           type: ObjectId
- *           description: Prenom d'un prestation
+ *           description: Id d'un prestataire
  *         service:
  *           type: [string]
  *           description: Code postale du prestation
@@ -76,6 +76,29 @@ router.get('/', async (req, res) => {
         res.send(err)
     }
 })
+/**
+ * @swagger
+ * /Prestations/{id}:
+ *   get:
+ *     summary: Retourne la prestation en fonction de l'id
+ *     tags: [Prestations]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: prestation correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: Information sur le prestation avec l'id renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestation'
+ *       404:
+ *         description: prestations non existant
+ */
 
 //Selectionner un seul prestation
 router.get('/:id', async (req, res) =>{
@@ -86,6 +109,23 @@ router.get('/:id', async (req, res) =>{
         res.send(err)
     }
 })
+
+/**
+ * @swagger
+ * /prestations:
+ *   post:
+ *     summary: crée un nouveau prestataire
+ *     tags: [Prestations]
+ *     responses:
+ *       201:
+ *         description: Prestation ajouté avec succée
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Prestations'
+ */
 
 //créer un prestation
 router.post("/", async (req, res) => {
