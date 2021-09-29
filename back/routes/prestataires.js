@@ -1,18 +1,18 @@
 const express = require("express");
-const prestataires = require("../models/prestataires");
+const Prestations = require("../models/Prestations");
 const router = express.Router()
-const modelPrestataires = require('../models/prestataires')
+const modelPrestations = require('../models/Prestations')
 
 /**
  * @swagger
  * components:
  *  schemas:
- *      Prestataire:
+ *      Prestation:
  *          type: object
  *          properties:
  *              id:
  *                  type: int
- *                  description: Identifiant du prestataire
+ *                  description: Identifiant du Prestation
  *              service:
  *                  type: string
  *                  description: Service Proposé
@@ -25,39 +25,39 @@ const modelPrestataires = require('../models/prestataires')
  * @swagger
  * tags:
  *  name: Prestatataires
- *  descritpions: Route API de la ressource Prestataires
+ *  descritpions: Route API de la ressource Prestations
  */
 
-//Selectionner tout les prestataires
+//Selectionner tout les Prestations
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find();
-        res.status(201).json(prestataires);
+        const Prestations = await modelPrestations.find();
+        res.status(201).json(Prestations);
     }catch (err){
         res.send(err)
     }
 })
 
-//Selectionner un seul prestataire
+//Selectionner un seul Prestation
 router.get('/:id', async (req, res) =>{
     try {
-        const prestataire = await modelPrestataires.findById(req.params.id);
-        res.status(200).json(prestataire)
+        const Prestation = await modelPrestations.findById(req.params.id);
+        res.status(200).json(Prestation)
     } catch (err) {
         res.send(err)
     }
 })
 
-//créer un prestataire
+//créer un Prestation
 router.post("/", async (req, res) => {
-    const prestataire = new modelPrestataires({
+    const Prestation = new modelPrestations({
         nom: req.body.nom,
         prenom: req.body.prenom,
         code_postale: req.body.code_postale,
         service: req.body.service
     })
     try{
-        const newPrestaire = await prestataire.save();
+        const newPrestaire = await Prestation.save();
         res.status(200).json(newPrestaire)
     }catch(err){
         res.send(err)
@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
     try{
-        await modelPrestataires.updateOne(
+        await modelPrestations.updateOne(
             {_id: req.params.id},
             {$set: {nom: req.body.nom ,
             prenom: req.body.prenom ,
@@ -82,7 +82,7 @@ router.put("/:id",async (req, res) => {
 
 router.delete("/:id",async (req, res) => {
 try{
-    await modelPrestataires.deleteOne({_id:req.params.id})
+    await modelPrestations.deleteOne({_id:req.params.id})
     res.send()
 }catch(err){
     res.send(err)
