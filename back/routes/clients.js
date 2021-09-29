@@ -48,7 +48,7 @@ const modelclients = require('../models/client')
  * @swagger
  * tags:
  *  name: Clients
- *  description: Route API clients 
+ *  description: Route API clients -Port 6000
  */
 
 /**
@@ -65,7 +65,7 @@ const modelclients = require('../models/client')
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/clients'
+ *                 $ref: '#/components/schemas/Clients'
  */
 
 //Selectionner tout les clients 
@@ -98,7 +98,7 @@ router.get('/', async (req, res) => {
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/clients'
+ *               $ref: '#/components/schemas/Clients'
  *       404:
  *         description: clients non existant
  */
@@ -124,7 +124,7 @@ router.get('/:id', async (req, res) =>{
  *      content:
  *       application/json:
  *        schema:
- *         $ref: '#/components/schemas/clients'
+ *         $ref: '#/components/schemas/Clients'
  *     responses:
  *       201:
  *         description: client ajouté avec succé
@@ -133,16 +133,20 @@ router.get('/:id', async (req, res) =>{
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/clients'
+ *                 $ref: '#/components/schemas/Clients'
  */
 
 //créer un client
 router.post("/", async (req, res) => {
     const client = new modelclients({
-        nom: req.body.nom,
-        prenom: req.body.prenom,
+        nom: req.body.nom ,
+        prenom: req.body.prenom ,
         code_postal: req.body.code_postal,
-        service: req.body.service
+        pseudo: req.body.pseudo,
+        adresse: req.body.adresse,
+        complement_adresse: req.body.complement_adresse,
+        adresse_mail: req.body.adresse_mail,
+        date_de_naissance: req.body.date_de_naissance
     })
     try{
         const newPrestaire = await client.save();
@@ -170,7 +174,7 @@ router.post("/", async (req, res) => {
  *      content:
  *       application/json:
  *        schema:
- *         $ref: '#/components/schemas/clients'
+ *         $ref: '#/components/schemas/Clients'
  *     responses:
  *       201:
  *         description: Information modifié avec succé
@@ -179,7 +183,7 @@ router.post("/", async (req, res) => {
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/clients'
+ *                 $ref: '#/components/schemas/Clients'
  *       404:
  *         description: client inexistant
  */
@@ -194,7 +198,7 @@ router.put("/:id",async (req, res) => {
                 nom: req.body.nom ,
                 prenom: req.body.prenom ,
                 code_postal: req.body.code_postal,
-                pseudo: req.body.code_postal,
+                pseudo: req.body.pseudo,
                 adresse: req.body.adresse,
                 complement_adresse: req.body.complement_adresse,
                 adresse_mail: req.body.adresse_mail,
@@ -225,7 +229,7 @@ router.put("/:id",async (req, res) => {
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/clients'
+ *               $ref: '#/components/schemas/Clients'
  *       404:
  *         description: client non existant
  */
