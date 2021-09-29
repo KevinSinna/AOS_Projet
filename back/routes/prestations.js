@@ -6,26 +6,65 @@ const modelprestations = require('../models/prestation')
 /**
  * @swagger
  * components:
- *  schemas:
- *      prestation:
- *          type: object
- *          properties:
- *              id:
- *                  type: int
- *                  description: Identifiant du prestation
- *              service:
- *                  type: string
- *                  description: Service Proposé
- *          example:
- *              id: 1
- *              service: plombier
+ *   schemas:
+ *     Prestations:
+ *       type: object
+ *       required:
+ *        - ClientID
+ *        - prestationsID
+ *        - service
+ *        - date
+ *        - adresse
+ *        - code_postal
+ *       properties:
+ *         id:
+ *           type: ObjectId
+ *           description: Numéro d'identifiant prestation auto généré 
+ *         ClientID:
+ *           type: ObjectId
+ *           description: Nom d'un prestation
+ *         prestationsID:
+ *           type: ObjectId
+ *           description: Prenom d'un prestation
+ *         service:
+ *           type: [string]
+ *           description: Code postale du prestation
+ *         date:
+ *           type: Date
+ *           description: Liste des services proposé par le prestation 
+ *         adresse:
+ *           type: String
+ *           description: Liste des services proposé par le prestation 
+ *       example:
+ *         id: 4524824653
+ *         nom: LaPorte
+ *         prenom: Jules
+ *         code_postale: 91100
+ *         service: plombier
  */
 
 /**
  * @swagger
  * tags:
- *  name: Prestatataires
- *  descritpions: Route API de la ressource prestations
+ *  name: Prestations
+ *  description: Route API prestations 
+ */
+
+/**
+ * @swagger
+ * /Prestations:
+ *   get:
+ *     summary: retourne la liste des prestations
+ *     tags: [Prestations]
+ *     responses:
+ *       201:
+ *         description: liste de tous les prestations
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Prestations'
  */
 
 //Selectionner tout les prestations
@@ -52,7 +91,7 @@ router.get('/:id', async (req, res) =>{
 router.post("/", async (req, res) => {
     const prestation = new modelprestations({
         ClientID: req.body.ClientID,
-        PrestatairesID: req.body.PrestatairesID,
+        prestationsID: req.body.prestationsID,
         date: req.body.date,
         service: req.body.service
     })
@@ -72,7 +111,7 @@ router.put("/:id",async (req, res) => {
             {_id: req.params.id},
             {$set: {
                 ClientID: req.body.ClientID,
-                PrestatairesID: req.body.PrestatairesID,
+                prestationsID: req.body.prestationsID,
                 date: req.body.date,
                 service: req.body.service
         }}
