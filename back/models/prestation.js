@@ -1,12 +1,12 @@
 const mongoose = require ('mongoose')
 
 const prestationSchema = new mongoose.Schema({
-  nomprestataire:{
-    type: String,
+  ClientID:{
+    type: mongoose.Schema.Types.ObjectId,
     require:true
   },
-  nomclient:{
-    type:String,
+  PrestatairesID:{
+    type: mongoose.Schema.Types.ObjectId,
     require:true
   },
   service:{
@@ -14,7 +14,7 @@ const prestationSchema = new mongoose.Schema({
     require:true
   },
   date:{
-      type:String,
+      type:Date,
       require:true
   }
 })
