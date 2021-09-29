@@ -1,7 +1,7 @@
 const express = require("express");
-const prestataires = require("../models/prestataires");
+// const prestataires = require("../models/prestataire");
 const router = express.Router()
-const modelPrestataires = require('../models/prestataires')
+const modelPrestataires = require('../models/prestataire')
 
 /**
  * @swagger
