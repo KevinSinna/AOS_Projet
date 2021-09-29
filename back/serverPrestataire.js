@@ -38,11 +38,8 @@ const options = {
 }
 
 const specs = swaggerJsDoc(options)
-// Inititalisation de la bd db.defaults()
 const app = express()
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
-//app.db = db;
-//app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
 app.use("/prestataires", prestatairesRoutes)

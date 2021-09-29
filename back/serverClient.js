@@ -9,7 +9,7 @@ const clientsRoutes = require("./routes/clients.js")
 
 mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/User')
 
-const port = 5000;
+const port = 6000;
 
 mongoose.connection.once('open',function(){
   console.log('connection a bien été établie');
@@ -30,7 +30,7 @@ const options = {
         },
         servers: [ 
             {
-              url: "http://localhost:5000",
+              url: "http://localhost:6000",
             },
         ],
       },
