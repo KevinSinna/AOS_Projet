@@ -1,73 +1,172 @@
 const express = require("express");
-const Prestations = require("../models/Prestations");
+const prestataires = require("../models/prestataires");
 const router = express.Router()
-const modelPrestations = require('../models/Prestations')
+const modelPrestataires = require('../models/prestataires')
 
 /**
  * @swagger
  * components:
- *  schemas:
- *      Prestation:
- *          type: object
- *          properties:
- *              id:
- *                  type: int
- *                  description: Identifiant du Prestation
- *              service:
- *                  type: string
- *                  description: Service Proposé
- *          example:
- *              id: 1
- *              service: plombier
+ *   schemas:
+ *     Prestataires:
+ *       type: object
+ *       required:
+ *        - nom
+ *        - prenom
+ *        - code_postale
+ *        - service
+ *       properties:
+ *         id:
+ *           type: number
+ *           description: Numéro d'identifiant prestataire auto généré 
+ *         nom:
+ *           type: string
+ *           description: Nom d'un prestataire
+ *         prenom:
+ *           type: string
+ *           description: Prenom d'un prestataire
+ *         code_postale:
+ *           type: string
+ *           description: Code postale du prestataire
+ *         service:
+ *           type: [string]
+ *           description: Liste des services proposé par le prestataire 
+ *       example:
+ *         id: 4524824653
+ *         nom: LaPorte
+ *         prenom: Jules
+ *         code_postale: 91100
+ *         service: plombier
  */
 
 /**
  * @swagger
  * tags:
- *  name: Prestatataires
- *  descritpions: Route API de la ressource Prestations
+ *  name: Prestataires
+ *  description: Route API Prestataires 
  */
 
-//Selectionner tout les Prestations
+/**
+ * @swagger
+ * /prestataires:
+ *   get:
+ *     summary: retourne la liste des prestataires
+ *     tags: [Prestataires]
+ *     responses:
+ *       201:
+ *         description: liste de tous les prestataires
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Prestataires'
+ */
+
+//Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const Prestations = await modelPrestations.find();
-        res.status(201).json(Prestations);
+        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postale','service']);
+        res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
     }
 })
 
-//Selectionner un seul Prestation
+/**
+ * @swagger
+ * /prestataires/{id}:
+ *   get:
+ *     summary: Retourne le prestataire en fonction de l'id
+ *     tags: [Prestataires]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Prestataire correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: Information sur le prestataire avec l'id renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestataires'
+ *       404:
+ *         description: Prestataires non existant
+ */
+
+//Selectionner un seul prestataire
 router.get('/:id', async (req, res) =>{
     try {
-        const Prestation = await modelPrestations.findById(req.params.id);
-        res.status(200).json(Prestation)
+        const prestataire = await modelPrestataires.findById(req.params.id);
+        res.status(200).json(prestataire)
     } catch (err) {
         res.send(err)
     }
 })
 
-//créer un Prestation
+/**
+ * @swagger
+ * /prestataires:
+ *   post:
+ *     summary: crée un nouveau prestataire
+ *     tags: [Prestataires]
+ *     responses:
+ *       201:
+ *         description: Prestataire ajouté avec succé
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Prestataires'
+ */
+
+//créer un prestataire
 router.post("/", async (req, res) => {
-    const Prestation = new modelPrestations({
+    const prestataire = new modelPrestataires({
         nom: req.body.nom,
         prenom: req.body.prenom,
         code_postale: req.body.code_postale,
         service: req.body.service
     })
     try{
-        const newPrestaire = await Prestation.save();
+        const newPrestaire = await prestataire.save();
         res.status(200).json(newPrestaire)
     }catch(err){
         res.send(err)
     }
 })
 
+/**
+ * @swagger
+ * /prestataires/{id}:
+ *   put:
+ *     summary: Met à jour les informations du prestataires en fonction de l'id
+ *     tags: [Prestataires]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Prestataire correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: Information sur le prestataire avec l'id renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestataires'
+ *       404:
+ *         description: Prestataires non existant
+ */
+
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
     try{
-        await modelPrestations.updateOne(
+        await modelPrestataires.updateOne(
             {_id: req.params.id},
             {$set: {nom: req.body.nom ,
             prenom: req.body.prenom ,
@@ -80,9 +179,33 @@ router.put("/:id",async (req, res) => {
     }
 })
 
+/**
+ * @swagger
+ * /prestataires/{id}:
+ *   delete:
+ *     summary: Supprime le prestataire correspondant à l'id
+ *     tags: [Prestataires]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Supprime le prestataire correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: Prestataire supprimé 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestataires'
+ *       404:
+ *         description: Prestataire non existant
+ */
+
 router.delete("/:id",async (req, res) => {
 try{
-    await modelPrestations.deleteOne({_id:req.params.id})
+    await modelPrestataires.deleteOne({_id:req.params.id})
     res.send()
 }catch(err){
     res.send(err)
