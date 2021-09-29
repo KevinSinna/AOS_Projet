@@ -70,10 +70,12 @@ router.put("/:id",async (req, res) => {
     try{
         await modelprestations.updateOne(
             {_id: req.params.id},
-            {$set: {nom: req.body.nom ,
-            prenom: req.body.prenom ,
-            code_postale: req.body.code_postale ,
-            service: req.body.service}}
+            {$set: {
+                ClientID: req.body.ClientID,
+                PrestatairesID: req.body.PrestatairesID,
+                date: req.body.date,
+                service: req.body.service
+        }}
         );
         res.send();
     }catch(err){

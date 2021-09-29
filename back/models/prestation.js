@@ -16,7 +16,12 @@ const prestationSchema = new mongoose.Schema({
   date:{
       type:Date,
       require:true
-  }
+  },
+  adresse:{
+      type:String,
+      require:true
+  },
+
 })
 
 module.exports = mongoose.model('Prestations',prestationSchema,"Prestation")
