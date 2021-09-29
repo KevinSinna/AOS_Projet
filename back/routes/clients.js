@@ -3,7 +3,7 @@ const { ClientSession } = require("mongodb");
 // const clients = require("../models/clients");
 const router = express.Router()
 const modelclients = require('../models/client')
-
+@swagger
 //Selectionner tout les clients 
 router.get('/', async (req, res) => {
     try{
