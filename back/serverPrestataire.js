@@ -47,7 +47,7 @@ const options = {
 }
 
 const specs = swaggerJsDoc(options)
-// Inititalisation de la bd db.defaults()
+// Inititalisation de la bd db
 const app = express()
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 //app.db = db;
@@ -63,4 +63,13 @@ app.use(morgan("dev"))
 app.use("/prestataires", prestatairesRoutes)
 app.use("/prestations", prestationsRoutes)
 app.use("/clients", clientsRoutes)
+const app = express()
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
+app.use(cors())
+app.use(express.json())
+app.use(cors)
+app.use(morgan("dev"))
+app.use("/prestations", prestationsRoutes)
+
+
 app.listen(port, () => console.log(`Serveur lancé port : ${port}`))
