@@ -63,13 +63,6 @@ app.use(morgan("dev"))
 app.use("/prestataires", prestatairesRoutes)
 app.use("/prestations", prestationsRoutes)
 app.use("/clients", clientsRoutes)
-const app = express()
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
-app.use(cors())
-app.use(express.json())
-app.use(cors)
-app.use(morgan("dev"))
-app.use("/prestations", prestationsRoutes)
 
 
 app.listen(port, () => console.log(`Serveur lancé port : ${port}`))

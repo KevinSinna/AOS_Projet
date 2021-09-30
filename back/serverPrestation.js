@@ -32,24 +32,18 @@ const options = {
             {
               url: "http://localhost:5000",
             },
-            {
-              url: "http://localhost:6000",
-            },
         ],
       },
     apis: ["./routes/*.js"],
 }
 
 const specs = swaggerJsDoc(options)
+// Inititalisation de la bd db.defaults()
 const app = express()
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
-<<<<<<< HEAD:back/serverPrestation.js
 //app.db = db;
 app.use(cors())
-=======
->>>>>>> soumeth:back/serverPrestataire.js
 app.use(express.json())
-app.use(cors)
 app.use(morgan("dev"))
 app.use("/prestations", prestationsRoutes)
 
