@@ -9,7 +9,7 @@ const prestatairesSchema = new mongoose.Schema({
     type:String,
     require:true
   },
-  code_postale:{
+  code_postal:{
     type: Number,
     require:true
   },
