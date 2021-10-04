@@ -28,26 +28,27 @@ const modelprestations = require('../models/prestation')
  *           description: Id d'un prestataire
  *         service:
  *           type: [string]
- *           description: Code postale du prestation
+ *           description: service rendue
  *         date:
  *           type: Date
- *           description: Liste des services proposé par le prestation 
+ *           description: Date de la prestation 
  *         adresse:
  *           type: String
- *           description: Liste des services proposé par le prestation 
+ *           description: Adresse de la prestation 
  *       example:
- *         id: 4524824653
- *         nom: LaPorte
- *         prenom: Jules
- *         code_postale: 91100
+ *         ClientID: 614b3555ca728a847b99a6d9
+ *         PrestatairesID: 614c5b1b853b0d77a38863bb
  *         service: plombier
+ *         date: 2021:05:05
+ *         adresse: 55 rue de la paix
+ *         
  */
 
 /**
  * @swagger
  * tags:
  *  name: Prestations
- *  description: Route API prestations 
+ *  description: Route API prestations -Port 7500 
  */
 
 /**
@@ -116,6 +117,12 @@ router.get('/:id', async (req, res) =>{
  *   post:
  *     summary: crée un nouveau prestataire
  *     tags: [Prestations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *        application/json:
+ *         schema:
+ *          $ref: '#/components/schemas/Prestations'
  *     responses:
  *       201:
  *         description: Prestation ajouté avec succée
@@ -143,6 +150,37 @@ router.post("/", async (req, res) => {
         res.send(err)
     }
 })
+/**
+ * @swagger
+ * /prestations/{id}:
+ *   put:
+ *     summary: Modifier les informations d'une prestation
+ *     tags: [Prestations]
+ *     parameters:
+ *       - in: path
+ *         name: id 
+ *         schema:
+ *          type: string
+ *          required: true
+ *          description: ID du client 
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Prestations'
+ *     responses:
+ *       201:
+ *         description: Information modifié avec succé
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Prestations'
+ *       404:
+ *         description: Prestation inexistant
+ */
 
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
@@ -161,7 +199,29 @@ router.put("/:id",async (req, res) => {
         res.send(err)
     }
 })
-
+/**
+ * @swagger
+ * /prestations/{id}:
+ *   delete:
+ *     summary: Supprime une prestation correspondant à l'id
+ *     tags: [Prestations]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Supprime le prestation correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: prestation supprimé 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestations'
+ *       404:
+ *         description: prestation non existant
+ */
 router.delete("/:id",async (req, res) => {
 try{
     await modelprestations.deleteOne({_id:req.params.id})
