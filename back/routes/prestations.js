@@ -23,7 +23,7 @@ const modelprestations = require('../models/prestation')
  *         ClientID:
  *           type: ObjectId
  *           description: Id d'un client
- *         prestationsID:
+ *         PrestationsID:
  *           type: ObjectId
  *           description: Id d'un prestataire
  *         service:
@@ -138,9 +138,10 @@ router.get('/:id', async (req, res) =>{
 router.post("/", async (req, res) => {
     const prestation = new modelprestations({
         ClientID: req.body.ClientID,
-        prestationsID: req.body.prestationsID,
+        PrestatairesID: req.body.PrestatairesID,
         date: req.body.date,
-        service: req.body.service
+        service: req.body.service,
+        adresse: req.body.adresse
     })
     try{
         const newPrestaire = await prestation.save();
