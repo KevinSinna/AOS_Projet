@@ -66,7 +66,7 @@ const bcrypt = require('bcrypt')
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postale','service']);
+        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postale','service','email','motdepasse']);
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
@@ -135,9 +135,9 @@ router.post("/", async (req, res) => {
         service: req.body.service
     })
     try{
-        motdepasse = bcrypt.hash(motdepasse,10)
+        prestataire['motdepasse'] = await bcrypt.hash(prestataire['motdepasse'],10);
         const newPrestaire = await prestataire.save();
-        res.status(200).json(newPrestaire)
+        res.status(200).json(newPrestaire);
     }catch(err){
         res.send(err)
     }
