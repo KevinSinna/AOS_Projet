@@ -2,7 +2,8 @@ const express = require("express");
 // const prestataires = require("../models/prestataire");
 const router = express.Router()
 const modelPrestataires = require('../models/prestataire')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { exists } = require("../models/prestataire");
 
 /**
  * @swagger
@@ -135,6 +136,17 @@ router.post("/", async (req, res) => {
         service: req.body.service
     })
     try{
+        const prestataires = await modelPrestataires.find().select(['email']);
+        prestataire['email'] = '@gmail.com';
+        modelPrestataires.exists({email:'renard@gmail.com'}, function (err,doc){
+            if(err){
+                console.log('exite,', doc);
+            }
+            else{
+                console.log('Result :',doc);
+            }
+        })
+
         prestataire['motdepasse'] = await bcrypt.hash(prestataire['motdepasse'],10);
         const newPrestaire = await prestataire.save();
         res.status(200).json(newPrestaire);
@@ -169,6 +181,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
+
     try{
         await modelPrestataires.updateOne(
             {_id: req.params.id},
