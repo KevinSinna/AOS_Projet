@@ -2,6 +2,7 @@ const express = require("express");
 // const prestataires = require("../models/prestataire");
 const router = express.Router()
 const modelPrestataires = require('../models/prestataire')
+const bcrypt = require('bcrypt')
 
 /**
  * @swagger
@@ -128,10 +129,13 @@ router.post("/", async (req, res) => {
     const prestataire = new modelPrestataires({
         nom: req.body.nom,
         prenom: req.body.prenom,
+        email: req.body.email,
+        motdepasse: req.body.motdepasse,
         code_postale: req.body.code_postale,
         service: req.body.service
     })
     try{
+        motdepasse = bcrypt.hash(motdepasse,10)
         const newPrestaire = await prestataire.save();
         res.status(200).json(newPrestaire)
     }catch(err){

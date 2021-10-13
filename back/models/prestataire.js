@@ -13,6 +13,14 @@ const prestatairesSchema = new mongoose.Schema({
     type: Number,
     require:true
   },
+  email:{
+    type: String,
+    require: true
+  },
+  motdepasse:{
+    type: String,
+    require: true
+  },
   service:{
     type:[String],
     require:true
