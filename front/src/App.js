@@ -2,7 +2,6 @@
 import './App.css';
 import React from "react";
 import {BrowserRouter, Route, Switch } from "react-router-dom";
-import FilterTableService from './components/Service/FilterTableService';
 import Home from './page/Home'
 import Result from './page/Result'
 //import NotFound from './pages/NotFound';

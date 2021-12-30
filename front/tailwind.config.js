@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    backgroundImage: {
+      'pack-train': "url('./assets/img/background.jpg')",
+    },
   },
   variants: {
     extend: {},
