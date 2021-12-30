@@ -1,0 +1,10 @@
+.input_bar{
+  display: block;
+  width: auto;
+  height: auto;
+  border-radius: 25px;
+  background-color: white;
+}
+.input_marg{
+  margin-left: 10px;
+}

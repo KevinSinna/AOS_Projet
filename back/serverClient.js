@@ -1,5 +1,5 @@
 const express = require("express")
-// const cors = require("cors")
+const cors = require("cors")
 const morgan = require("morgan")
 const swaggerUI = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
@@ -9,7 +9,7 @@ const clientsRoutes = require("./routes/clients.js")
 
 mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/User')
 
-const port = 5000;
+const port = 4000;
 
 mongoose.connection.once('open',function(){
   console.log('connection a bien été établie');
@@ -42,7 +42,7 @@ const specs = swaggerJsDoc(options)
 const app = express()
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 //app.db = db;
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
 app.use("/clients", clientsRoutes)

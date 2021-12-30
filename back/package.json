@@ -2,15 +2,17 @@
   "name": "projet",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "serverPrestataire.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
-    "start": "nodemon -L app.js"
+    "start": "concurrently \"nodemon -L serverPrestataire.js\" \"nodemon -L serverClient.js\" \"nodemon -L serverPrestation.js\""
   },
   "author": "Evry",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^6.2.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "request": "^2.88.2",
     "swagger-jsdoc": "^6.1.0",
