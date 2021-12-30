@@ -3,6 +3,7 @@ import './App.css';
 import Menu from './components/Menu/Menu.js'
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import FilterTableService from './components/Service/FilterTableService';
 
 const Home = () => (
   <div>
@@ -23,7 +24,12 @@ const Products = () => (
 );
 function App() {
   return (
-    <div>
+    <FilterTableService avatar="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" nom = "Kev" prenom = "N" profession = "bg" localisation ="Evry"></FilterTableService>
+  );
+}
+
+export default App;
+/*<div>
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
           <li>
@@ -38,12 +44,8 @@ function App() {
         </ul>
       </nav>
 
-      { /* Route components are rendered if the path prop matches the current URL */}
-      <Route path="/"><Home /></Route>
+      { /* Route components are rendered if the path prop matches the current URL */
+     /* <Route path="/"><Home /></Route>
       <Route path="/category"><Category /></Route>
       <Route path="/products"><Products /></Route>
-    </div>
-  );
-}
-
-export default App;
+    </div>*/
