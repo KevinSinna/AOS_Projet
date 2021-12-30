@@ -4,8 +4,8 @@ class FilterTableService extends React.Component {
     return (
     <div class="max-w-sm w-full lg:max-w-full lg:flex">
     <div className = "grid grid-cols-2 grid-rows-4">
-      <img class="row-span-3 inline object-cover w-16 h-16 mr-2 rounded-full" src = {this.props.avatar}/>
-      <div className = "grid grid-cols-2 grid-rows-1 text-sm">
+      <img class="row-span-3 inline object-cover w-20 h-20 mr-2 rounded-full" src = {this.props.avatar}/>
+      <div className = "grid grid-cols-2 grid-rows-1 text-sm"cd >
       <label class="text-gray-900 leading-none">{this.props.nom}</label>
       <label class="text-gray-900 leading-none">{this.props.prenom}</label>
       </div>
