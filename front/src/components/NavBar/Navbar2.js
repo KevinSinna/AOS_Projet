@@ -27,7 +27,7 @@ const resources = [
   {
     name: 'FAQs',
     description: 'Tout les réponses nécéssaire.',
-    href: '#',
+    href: './faq',
     icon: SupportIcon,
   },
 
