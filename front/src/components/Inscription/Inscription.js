@@ -12,17 +12,75 @@ export default function Example() {
               src = {image} 
               alt="logo"
             />
-            <h2 className="mt-1 text-center text-3xl font-extrabold text-gray-900">Connectez-vous à votre compte</h2>
+            <h2 className="mt-1 text-center text-3xl font-extrabold text-gray-900">Créer vous un compte</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-               Créer vous un compte
+               Déja membre ?
               </a>
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+                <label htmlFor="Nom" className="sr-only">
+                  Nom
+                </label>
+                <input
+                  id="nom"
+                  name="nom"
+                  type="nom"
+                  autoComplete="nom"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Nom "
+                />
+              </div>
+              <div>
+                <label htmlFor="Prénom" className="sr-only">
+                  Prénom
+                </label>
+                <input
+                  id="Prénom"
+                  name="Prénom"
+                  type="noPrénomm"
+                  autoComplete="Prénom"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Prénom "
+                />
+              </div>
+              <div>
+                <label htmlFor="adresse" className="sr-only">
+                  Addresse 
+                </label>
+                <input
+                  id="adresse"
+                  name="adresse"
+                  type="adresse"
+                  autoComplete="adresse"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Adresse Postale"
+                />
+              </div>
+              <div>
+                <label htmlFor="Code Postale" className="sr-only">
+                  Code Postale 
+                </label>
+                <input
+                  id="Code Postale"
+                  name="Code Postale"
+                  type="Code Postale"
+                  autoComplete="Code Postale"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Code Postale"
+                />
+              </div>
+              </div>
+              <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email-address" className="sr-only">
                   Addresse Mail
@@ -34,7 +92,7 @@ export default function Example() {
                   autoComplete="email"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="Adresse éléctronique"
                 />
               </div>
               <div>
