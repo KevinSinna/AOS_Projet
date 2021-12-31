@@ -15,7 +15,7 @@ export default function Example() {
             <h2 className="mt-1 text-center text-3xl font-extrabold text-gray-900">Connectez-vous à votre compte</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a href="./inscription" className="font-medium text-indigo-600 hover:text-indigo-500">
                Créer vous un compte
               </a>
             </p>

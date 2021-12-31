@@ -1,4 +1,4 @@
-import image from "../../assets/img/logo.png"
+import image from "../../assets/img/logo.png";
 
 export default function Example() {
   return (
@@ -15,7 +15,7 @@ export default function Example() {
             <h2 className="mt-1 text-center text-3xl font-extrabold text-gray-900">Créer vous un compte</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              <a href="./connexion" className="font-medium text-indigo-600 hover:text-indigo-500">
                Déja membre ?
               </a>
             </p>

@@ -11,7 +11,8 @@ function App() {
   return (
   <BrowserRouter>
     <Switch>
-      <Route path= "/" exact component={Home}/>
+    <Route path= "/" exact component={Home}/>
+      <Route path= "/home" exact component={Home}/>
       <Route path="/result" exact component={Result}/>
       <Route path= "/connexion" exact component={Connexion}/>
       <Route path= "/inscription" exact component={Inscription}/>
