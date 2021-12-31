@@ -1,5 +1,5 @@
 import React from "react";
-
+import image from "../../assets/img/persotest.png"
 
 export default function Cards() {
     return (
@@ -10,6 +10,13 @@ export default function Cards() {
                   <p class="text-gray-700 text-base">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
                     </p>
+                  </div>
+                                <div class="flex items-center">
+                    <img class="w-10 h-10 rounded-full mr-4" src={image} alt="Avatar of Jonathan Reinink"/>
+                    <div class="text-sm">
+                      <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+                      <p class="text-gray-600">Aug 18</p>
+                    </div>
                   </div>
                   <div class="px-6 pt-4 pb-2">
                   <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#Artiste</span>

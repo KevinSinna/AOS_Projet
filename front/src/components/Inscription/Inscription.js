@@ -1,10 +1,10 @@
 import image from "../../assets/img/logo.png";
 
-export default function Example() {
+export default function Inscription() {
   return (
     <>
 
-      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-pack-train bg-cover bg-center  flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
             <img
@@ -12,10 +12,10 @@ export default function Example() {
               src = {image} 
               alt="logo"
             />
-            <h2 className="mt-1 text-center text-3xl font-extrabold text-gray-900">Créer vous un compte</h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or{' '}
-              <a href="./connexion" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <h2 className="mt-1 text-center text-3xl font-extrabold text-white">Créer vous un compte</h2>
+            <p className="mt-2 text-center text-sm text-white">
+              Ou{' '}
+              <a href="./connexion" className="font-medium text-white hover:text-pink-700">
                Déja membre ?
               </a>
             </p>

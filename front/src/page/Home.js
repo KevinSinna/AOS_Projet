@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from '../components/NavBar/Navbar'
+import NavBar from '../components/NavBar/Navbar2'
 import Cards from '../components/Cards/Cards'
 function App() {
   return (
