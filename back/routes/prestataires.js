@@ -140,13 +140,12 @@ router.post("/", async (req, res) => {
         prestataire['email'] = '@gmail.com';
         modelPrestataires.exists({email:'renard@gmail.com'}, function (err,doc){
             if(err){
-                console.log('exite,', doc);
+                res.send(err);
             }
             else{
-                console.log('Result :',doc);
+                res.send(doc);
             }
-        })
-
+        });
         prestataire['motdepasse'] = await bcrypt.hash(prestataire['motdepasse'],10);
         const newPrestaire = await prestataire.save();
         res.status(200).json(newPrestaire);
