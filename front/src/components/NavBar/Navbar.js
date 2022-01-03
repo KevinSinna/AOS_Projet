@@ -6,7 +6,7 @@ export default function Navbar() {
         <nav className="flex items-center justify-between flex-wrap bg-blue-500 p-6 shadow-md rounded-lg mr-4 ml-4 mt-2">
         {/* Logo navbar */}      
         <div class="flex items-center flex-shrink-0 text-white mr-6">
-            <span class="font-semibold text-xl tracking-tight ml-4">Helfen</span>
+        <a href="./home"> <span class="font-semibold text-xl tracking-tight ml-4">Helfen</span> </a>
         </div>    
             
         {/* Liste navbar */}  
@@ -20,7 +20,7 @@ export default function Navbar() {
             </div>
         {/* Connection navbar */}  
             <div>
-                <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0 shadow-lg shadow-cyan-200/20">Se connecter</a>
+                <a href="./connexion" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white mt-4 lg:mt-0 shadow-lg shadow-cyan-200/20">Se connecter</a>
             </div>
         </nav>
     )

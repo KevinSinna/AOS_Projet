@@ -1,6 +1,8 @@
 import React from "react";
-import NavBar from '../components/NavBar/Navbar'
+import NavBar from '../components/NavBar/Navbar2'
+import Cards from '../components/Cards/Cards'
 function App() {
+  const descr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.";
   return (
     <div className="min-h-screen bg-pack-train bg-cover bg-center flex flex-col bg-fixed text-white">
     <NavBar></NavBar>
@@ -14,7 +16,7 @@ function App() {
           </div>
 
       <div>
-                  <nav className="flex items-center justify-between flex-wrap bg-rose-300/[.02]  p-6 shadow-md rounded-lg mr-20 ml-20 mt-20">
+                  <nav className="flex items-center justify-between flex-wrap bg-pink-300 bg-opacity-10  p-6 shadow-md rounded-lg mr-20 ml-20 mt-20">
                   {/* Logo navbar */}      
                       <div class="flex items-center flex-shrink-0 text-white mr-6">
                           <span class="font-semibold text-xl tracking-tight ml-4">Que recherchez-vous ?</span>
@@ -22,7 +24,7 @@ function App() {
                       
                   {/* recherche navbar */}  
                       <div class="text-sm lg:flex-grow "> 
-                          <input class="placeholder:italic text-black placeholder:text-gray-400 block bg-grey w-full border border-gray-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 mr-3 focus:ring-1 sm:text-sm" placeholder="Prenez un rendez-vous..." type="text" name="search"/>         
+                          <input class="placeholder:italic text-black placeholder:text-gray-400 block bg-grey w-full border border-gray-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 mr-3 focus:ring-2 sm:text-sm" placeholder="Prenez un rendez-vous..." type="text" name="search"/>         
                       </div>
                   {/* lancer navbar */}  
                       <div>
@@ -32,7 +34,12 @@ function App() {
                   </nav>
 
       </div>    
-
+        <div class="flex justify-center space-x-4 mt-2 ml-20 ">
+            <div class="flex-1 "><Cards nom = "Sinnadurai" prenom = "Kévin" description ={descr}></Cards></div>
+            <div class="flex-1 "><Cards nom = "Hamidi" prenom = "Badr" description ={descr}></Cards></div>
+            <div class="flex-1 "><Cards nom = "Bensaid" prenom = "Ahmed" description ={descr}></Cards></div>
+        </div>
+      
       </div>
   );}
   export default App;
