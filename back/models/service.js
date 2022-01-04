@@ -1,20 +1,26 @@
 const mongoose = require ('mongoose')
 
 const serviceSchema = new mongoose.Schema({
-  PrestatairesID:{
+  PrestataireID:{
     type: mongoose.Schema.Types.ObjectId,
     require:true
   },
-  service:{
-    type: String
-  },
-  description:{
-    type: String
-  },
-  date:{
-    type:[Date],
+  Service:{
+    type:[String],
     require:true
-  }
+  },
+  DateDebut:{
+      type:Date,
+      require:true
+  },
+  DateFin:{
+    type:Date,
+    require:true
+},
+  Description:{
+  type:[String],
+  require:true
+},
 })
 
-module.exports = mongoose.model('Services',serviceSchema,"Services")
+module.exports = mongoose.model('Services',serviceSchema,"Service")
