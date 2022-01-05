@@ -4,10 +4,10 @@ const morgan = require("morgan")
 const swaggerUI = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
 const mongoose = require('mongoose')
-const serviceRoutes = require("./routes/service.js")
+const servicesRoutes = require("./routes/services.js")
 
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/Services')
+mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/Service')
 
 const port = 7000;
 
@@ -29,13 +29,10 @@ const options = {
           }
         },
         servers: [ 
-          {
-            url: "http://localhost:5000",
-          },
-          {
-            url: "http://localhost:7000",
-          },
-      ],
+            {
+              url: "http://localhost:7000",
+            },
+        ],
       },
     apis: ["./routes/*.js"],
 }
@@ -48,7 +45,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs))
 app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
-app.use("/service", serviceRoutes)
+app.use("/services", servicesRoutes)
 
 
 app.listen(port, () => console.log(`Serveur lancé port : ${port}`))
