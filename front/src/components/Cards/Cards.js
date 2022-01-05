@@ -8,7 +8,7 @@ export default function Cards(props) {
                 <div class="px-6 py-4">
                   <div class="font-bold text-xl mb-2 text-gray-700">{props.nom + " " + props.prenom}</div>
                   <p class="text-gray-700 text-base">
-                      {props}
+                      {props.description}
                     </p>
                   </div>
                                 <div class="flex items-center">
