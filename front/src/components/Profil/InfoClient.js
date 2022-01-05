@@ -40,7 +40,7 @@ export default function InfoClient() {
                       />
                     </div>
                     <br/><br/><br/><br/>
-                    <div className="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                       <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                         Nom
                       </label>

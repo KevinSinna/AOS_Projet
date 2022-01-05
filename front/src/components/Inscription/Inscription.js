@@ -1,9 +1,33 @@
+import React from "react";
 import image from "../../assets/img/logo.png";
 
-export default function Inscription() {
+export default class Inscription extends React.Component{
+  constructor(props){
+    super(props);
+    this.registrer = this.registrer.bind(this);
+  }
+  async registrer()
+  { const items = {
+    nom : document.getElementById("nom").value,
+    prenom : document.getElementById("prenom").value,
+    adresse : document.getElementById("adresse").value,
+    adresse_mail : document.getElementById("email").value,
+    code_postal :document.getElementById("code_Postale").value
+  }
+  let result = await fetch('http://localhost:4000/clients',{
+  method : 'POST',
+  body:JSON.stringify(items),
+  headers:{
+    "Content-Type":"application/json",
+    "Accept":"application/json"
+  }
+});
+  result = await result.json();
+  console.log(result);
+ }
+  render(){
   return (
     <>
-
       <div className="min-h-screen bg-pack-train bg-cover bg-center  flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -20,8 +44,7 @@ export default function Inscription() {
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" defaultValue="true" />
+          <form className="mt-8 space-y-6">
             <div className="rounded-md shadow-sm -space-y-px">
             <div>
                 <label htmlFor="Nom" className="sr-only">
@@ -42,7 +65,7 @@ export default function Inscription() {
                   Prénom
                 </label>
                 <input
-                  id="Prénom"
+                  id="prenom"
                   name="Prénom"
                   type="noPrénomm"
                   autoComplete="Prénom"
@@ -70,8 +93,8 @@ export default function Inscription() {
                   Code Postale 
                 </label>
                 <input
-                  id="Code Postale"
-                  name="Code Postale"
+                  id="code_Postale"
+                  name="Code_Postale"
                   type="Code Postale"
                   autoComplete="Code Postale"
                   required
@@ -86,7 +109,7 @@ export default function Inscription() {
                   Addresse Mail
                 </label>
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -114,8 +137,7 @@ export default function Inscription() {
            
 
             <div>
-              <button
-                type="submit"
+              <button onClick={this.registrer}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -125,8 +147,10 @@ export default function Inscription() {
               </button>
             </div>
           </form>
+          <button onClick={this.registrer}>test</button>
         </div>
       </div>
     </>
   )
+  }
 }
