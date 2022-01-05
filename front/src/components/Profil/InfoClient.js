@@ -66,6 +66,19 @@ export default function InfoClient() {
                       />
                     </div>
 
+                    <div className="col-span-6 sm:col-span-4">
+                      <label htmlFor="telephone" className="block text-sm font-medium text-gray-700">
+                        Numéro de téléphone
+                      </label>
+                      <input
+                        type="text"
+                        name="telephone"
+                        id="telephone"
+                        autoComplete="email"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+
                     <div className="col-span-6">
                       <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                         Adresse
