@@ -29,6 +29,10 @@ const clientSchema = new mongoose.Schema({
   adresse_mail:{
     type: String,
     require: true
+  },
+  telephone:{
+    type: Number,
+    require: true
   }
 })
 

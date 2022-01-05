@@ -16,6 +16,7 @@ const modelclients = require('../models/client')
  *        - adresse
  *        - code_postal
  *        - adresse_mail
+ *        - telephone
  *       properties:
  *         id:
  *           type: number
@@ -35,6 +36,9 @@ const modelclients = require('../models/client')
  *         adresse_mail:
  *           type: string
  *           description: Adresse mail du client
+ *         telephone:
+ *           type: int
+ *           description: Numéro de telephone du client
  *       example:
  *         id: 78212321025
  *         nom: Amadeus
@@ -42,13 +46,14 @@ const modelclients = require('../models/client')
  *         adresse_mail: julius@gmail.com
  *         adresse: 14 rue de la gare
  *         code_postal: 91100
+ *         telephone: 0132439586
  */
 
 /**
  * @swagger
  * tags:
  *  name: Clients
- *  description: Route API clients -Port 4000
+ *  description: Route API clients -Port 5000
  */
 
 /**
@@ -146,7 +151,8 @@ router.post("/", async (req, res) => {
         adresse: req.body.adresse,
         complement_adresse: req.body.complement_adresse,
         adresse_mail: req.body.adresse_mail,
-        date_de_naissance: req.body.date_de_naissance
+        date_de_naissance: req.body.date_de_naissance,
+        telephone : req.body.telephone
     })
     try{
         const newPrestaire = await client.save();
@@ -202,7 +208,8 @@ router.put("/:id",async (req, res) => {
                 adresse: req.body.adresse,
                 complement_adresse: req.body.complement_adresse,
                 adresse_mail: req.body.adresse_mail,
-                date_de_naissance: req.body.date_de_naissance
+                date_de_naissance: req.body.date_de_naissance,
+                telephone : req.body.telephone
             }}
           );
           res.send();
