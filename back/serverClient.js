@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const clientsRoutes = require("./routes/clients.js")
 
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/User')
+mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/client')
 
 const port = 4000;
 
