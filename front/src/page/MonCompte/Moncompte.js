@@ -7,8 +7,11 @@ const moncompte = () => {
     return (
         <div>
             <Navbar/>
+            <div className='flex flex-row '>
+                
             <Dashboard/>
             <InfoClient/>
+            </div>
         </div>
     );
 };

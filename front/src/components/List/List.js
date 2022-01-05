@@ -10,8 +10,6 @@ const people = [
     image:
     '../../assets/img/persotest.png',
   },
-<<<<<<< HEAD
-=======
   {
     name: 'Badr Cooper',
     title: 'Technicien',
@@ -21,7 +19,6 @@ const people = [
     image:
     '../../assets/img/persotest.png',
   },
->>>>>>> d4008ba6bda1bf0db4eb51091e50a57a321af4db
   // More people...
 ]
 

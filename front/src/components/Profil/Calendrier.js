@@ -4,260 +4,396 @@ import Prestationprofil from '../../components/Profil/Prestationencours';
 
 export default function Calendrier() {
     return (
-        <>
-            <div className="flex items-center justify-center py-8 px-4">
-                <div className="2xl:w-1/3 xl:w-1/2 lg:w-3/5 sm:w-4/5 w-full shadow-lg">
-                    <div className="md:p-16 md:pb-12 p-5 dark:bg-gray-800 bg-white rounded-t">
-                        <div className="px-4 flex items-center justify-between">
-                            <h1 className="text-2xl font-bold dark:text-gray-100 text-gray-800">October 2020</h1>
-                            <div className="flex items-center text-gray-800 dark:text-gray-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <polyline points="15 6 9 12 15 18" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler ml-3 icon-tabler-chevron-right" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <polyline points="9 6 15 12 9 18" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div className="flex items-center justify-between pt-12 overflow-x-auto">
-                            <table className="w-full">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">Mo</p>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">Tu</p>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">We</p>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">Th</p>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">Fr</p>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">Sa</p>
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div className="w-full flex justify-center">
-                                                <p className="text-2xl font-medium text-center text-gray-800 dark:text-gray-100">Su</p>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className="pt-6">
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center" />
-                                        </td>
-                                        <td className="pt-6">
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center" />
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center" />
-                                        </td>
-                                        <td className="pt-6">
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">1</p>
-                                            </div>
-                                        </td>
-                                        <td className="pt-6">
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">2</p>
-                                            </div>
-                                        </td>
-                                        <td className="pt-6">
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">3</p>
-                                            </div>
-                                        </td>
-                                        <td className="pt-6">
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">4</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">5</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">6</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">7</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="w-full h-full">
-                                                <div className="flex items-center justify-center w-full rounded-full cursor-pointer">
-                                                    <p className="text-2xl w-14 h-14 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">8</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">9</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">10</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">11</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">12</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">13</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">14</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">15</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">16</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">17</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">18</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">19</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">20</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">21</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">22</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">23</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">24</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100">25</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">26</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">27</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">28</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">29</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div className="px-4 py-4 cursor-pointer flex w-full justify-center">
-                                                <p className="text-2xl text-gray-500 dark:text-gray-100 font-medium">30</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div className="md:py-8 py-5 md:px-16 px-5 dark:bg-gray-700 bg-gray-50 rounded-b">
-                        <div className="px-4">
-                            <div className="border-b pb-4 border-gray-400 border-dashed">
-                                <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-                                <p className="text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 pt-2">Zoom call with design team</p>
-                                <p className="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-                            </div>
-                            <div className="border-b pb-4 border-gray-400 border-dashed pt-5">
-                                <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">10:00 AM</p>
-                                <p className="text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 pt-2">Orientation session with new hires</p>
-                            </div>
-                            <div className="border-b pb-4 border-gray-400 border-dashed pt-5">
-                                <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-                                <p className="text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 pt-2">Zoom call with design team</p>
-                                <p className="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">Discussion on UX sprint and Wireframe review</p>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="container mx-auto mt-5 ml-1 mr-3">
+    <div class="wrapper bg-white rounded shadow w-full ">
+      <div class="header flex justify-between border-b p-2">
+        <span class="text-lg font-bold">
+          2020 July [DONNEE DYNAMIQUE DU MOIS EN COURS]
+        </span>
+        <div class="buttons">
+          <button class="p-1">
+              <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+              </svg>
+          </button>
+          <button class="p-1">
+              <svg width="1em" fill="gray" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+          </button>
+        </div>
+      </div>
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Sunday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sun</span>
+            </th>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Monday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Mon</span>
+            </th>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Tuesday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Tue</span>
+            </th>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Wednesday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Wed</span>
+            </th>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Thursday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Thu</span>
+            </th>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Friday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Fri</span>
+            </th>
+            <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+              <span class="xl:block lg:block md:block sm:block hidden">Saturday</span>
+              <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sat</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center h-20">
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300 ">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">1</span>
                 </div>
-            </div>
-        </>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
+                  <div
+                    class="event bg-purple-400 text-white rounded p-1 text-sm mb-1"
+                  >
+                    <span class="event-name">
+                      Meeting
+                    </span>
+                    <span class="time">
+                      12:00~14:00
+                    </span>
+                  </div>
+                  <div
+                    class="event bg-purple-400 text-white rounded p-1 text-sm mb-1"
+                  >
+                    <span class="event-name">
+                      Meeting
+                    </span>
+                    <span class="time">
+                      18:00~20:00
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">2</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">3</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">4</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">6</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-hidden transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">7</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer">
+                  <div
+                    class="event bg-blue-400 text-white rounded p-1 text-sm mb-1"
+                  >
+                    <span class="event-name">
+                      Shopping
+                    </span>
+                    <span class="time">
+                      12:00~14:00
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500 text-sm">8</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+          </tr>
+
+          
+          <tr class="text-center h-20">
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">9</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">10</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">12</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">13</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">14</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">15</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500 text-sm">16</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+          </tr>
+         
+          <tr class="text-center h-20">
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">16</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">17</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">18</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">19</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">20</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">21</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500 text-sm">22</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+          </tr>
+          
+          <tr class="text-center h-20">
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">23</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">24</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">25</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">26</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">27</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">28</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500 text-sm">29</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+          </tr>
+         
+
+          <tr class="text-center h-20">
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">30</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">31</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border bg-gray-100 p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+                <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                  <div class="top h-5 w-full">
+                    <span class="text-gray-500">1</span>
+                  </div>
+                  <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+                </div>
+              </td>
+            <td class="border bg-gray-100 p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">2</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border bg-gray-100 p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">3</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border bg-gray-100 p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500">4</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+            <td class="border bg-gray-100 p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-gray-300">
+              <div class="flex flex-col h-40 mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                <div class="top h-5 w-full">
+                  <span class="text-gray-500 text-sm">5</span>
+                </div>
+                <div class="bottom flex-grow h-30 py-1 w-full cursor-pointer"></div>
+              </div>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
     );
 }

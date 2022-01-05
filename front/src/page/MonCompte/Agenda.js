@@ -8,8 +8,9 @@ const Agenda = () => {
     return (
         <div>
             <Navbar/>
-            <Dashboard/>
-            <Calendrier/>
+            <div className='flex flex-row '><Dashboard/>
+            <Calendrier/></div>
+           
         </div>
     );
 };

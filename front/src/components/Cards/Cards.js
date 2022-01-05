@@ -1,24 +1,14 @@
 import React from "react";
 import image from "../../assets/img/persotest.png"
 
-<<<<<<< HEAD
-export default function Cards() {
-=======
 export default function Cards(props) {
->>>>>>> d4008ba6bda1bf0db4eb51091e50a57a321af4db
     return (
               <div class="max-w-sm rounded overflow-hidden shadow-lg bg-wh bg-cover bg-center mt-7 ">
                 <div className=" bg-pack-font  ">
                 <div class="px-6 py-4">
-<<<<<<< HEAD
-                  <div class="font-bold text-xl mb-2 text-gray-700">Ahmed Bensaid</div>
-                  <p class="text-gray-700 text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-=======
                   <div class="font-bold text-xl mb-2 text-gray-700">{props.nom + " " + props.prenom}</div>
                   <p class="text-gray-700 text-base">
                       {props.description}
->>>>>>> d4008ba6bda1bf0db4eb51091e50a57a321af4db
                     </p>
                   </div>
                                 <div class="flex items-center">
