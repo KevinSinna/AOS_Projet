@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from '../components/NavBar/Navbar2'
 import Cards from '../components/Cards/Cards'
 function App() {
+  const descr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.";
   return (
     <div className="min-h-screen bg-pack-train bg-cover bg-center flex flex-col bg-fixed text-white">
     <NavBar></NavBar>
@@ -34,9 +35,9 @@ function App() {
 
       </div>    
         <div class="flex justify-center space-x-4 mt-2 ml-20 ">
-            <div class="flex-1 "><Cards></Cards></div>
-            <div class="flex-1 "><Cards></Cards></div>
-            <div class="flex-1 "><Cards></Cards></div>
+            <div class="flex-1 "><Cards nom = "Sinnadurai" prenom = "Kévin" description ={descr}></Cards></div>
+            <div class="flex-1 "><Cards nom = "Hamidi" prenom = "Badr" description ={descr}></Cards></div>
+            <div class="flex-1 "><Cards nom = "Bensaid" prenom = "Ahmed" description ={descr}></Cards></div>
         </div>
       
       </div>

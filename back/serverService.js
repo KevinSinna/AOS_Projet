@@ -7,9 +7,9 @@ const mongoose = require('mongoose')
 const serviceRoutes = require("./routes/service.js")
 
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/Service')
+mongoose.connect('mongodb+srv://admin:admin@cluster0.5rir6.mongodb.net/Services')
 
-const port = 6000;
+const port = 7000;
 
 mongoose.connection.once('open',function(){
   console.log('connection a bien été établie');
@@ -29,10 +29,13 @@ const options = {
           }
         },
         servers: [ 
-            {
-              url: "http://localhost:6000",
-            },
-        ],
+          {
+            url: "http://localhost:5000",
+          },
+          {
+            url: "http://localhost:7000",
+          },
+      ],
       },
     apis: ["./routes/*.js"],
 }

@@ -36,7 +36,7 @@ const modelclients = require('../models/client')
  *           type: string
  *           description: Adresse mail du client
  *       example:
- *         id: 78212321025
+ *         id: 782123210x
  *         nom: Amadeus
  *         prenom: Julius
  *         adresse_mail: julius@gmail.com
