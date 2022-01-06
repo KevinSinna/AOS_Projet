@@ -9,6 +9,14 @@ const prestatairesSchema = new mongoose.Schema({
     type:String,
     require:true
   },
+  email:{
+    type:String,
+    require:true
+  },
+  motdepasse:{
+    type:String,
+    require:true
+  },
   code_postal:{
     type: Number,
     require:true
