@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
+import React from "react"
 import image from "../../assets/img/persotest.png"
-const people = [
+/*const people = [
   {
     name: 'Badr Cooper',
     title: 'Technicien',
@@ -20,9 +21,48 @@ const people = [
     '../../assets/img/persotest.png',
   },
   // More people...
-]
+]*/
 
-export default function Example() {
+export default class List extends React.Component {
+  constructor(props){
+    super(props);   
+    this.state={
+      people:[{name: 'Badr Cooper',
+      title: 'Technicien',
+      department: 'Villepinte',
+      role: 'Admin',
+      email: 'test@example.com',
+      image:
+      '../../assets/img/persotest.png'}]
+    }
+  }
+ 
+  async componentDidMount() {
+    console.log('ap');
+      // GET request using fetch with async/await
+      const response = await fetch('http://localhost:7000/Services');
+      const data = await response.json();
+     console.warn(data);
+    const datap = data.map(async (data) => {
+         const response = await fetch('http://localhost:5000/prestataires/' + data.PrestataireID);
+         const prestataire = (await response.json());
+         console.warn(prestataire);
+         data = {
+           
+         }
+       })
+      
+
+     
+    //this.setState({ people: data.total })
+  }
+   
+
+
+  componentWillUnmount() {  }
+
+
+  render(props){
   return (
     <div className="flex flex-col mr-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -61,7 +101,7 @@ export default function Example() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
+                {this.state.people.map((person) => (
                   <tr key={person.email}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -98,4 +138,5 @@ export default function Example() {
       </div>
     </div>
   )
+ }
 }
