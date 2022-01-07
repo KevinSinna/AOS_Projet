@@ -43,16 +43,30 @@ export default class List extends React.Component {
       const response = await fetch('http://localhost:7000/Services');
       const data = await response.json();
      console.warn(data);
-    const datap = data.map(async (data) => {
-         const response = await fetch('http://localhost:5000/prestataires/' + data.PrestataireID);
-         const prestataire = (await response.json());
+    const datap = await data.map(async (service) => {
+         const response = await fetch('http://localhost:5000/prestataires/' +service.PrestataireID);
+         if (!response.ok) {
+          // get error message from body or default to response statusText
+          const error = (data && data.message) || response.statusText;
+          return Promise.reject(error);
+      }
+         const prestataire = await response.json();
          console.warn(prestataire);
-         data = {
-           
-         }
+         return ({name: prestataire.nom,
+         title: 'Plombier',
+         department: prestataire.code_postal,
+         role: 'Admin',
+         email: prestataire.email,
+         image:
+         '../../assets/img/persotest.png'
+         })
        })
-      
+       console.warn(datap);
+       datap.map((dat) =>{
+        
 
+       });
+      // this.setState({ people })
      
     //this.setState({ people: data.total })
   }
