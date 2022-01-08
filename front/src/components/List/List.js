@@ -22,8 +22,10 @@ import image from "../../assets/img/persotest.png"
   },
   // More people...
 ]*/
-
+const ServiceAPI = 'http://localhost:7000/Services';
+const PrestataireAPI = 'http://localhost:5000/prestataires/'
 export default class List extends React.Component {
+
   constructor(props){
     super(props);   
     this.state={
@@ -38,13 +40,12 @@ export default class List extends React.Component {
   }
  
   async componentDidMount() {
-    console.log('ap');
       // GET request using fetch with async/await
-      const response = await fetch('http://localhost:7000/Services');
+      const response = await fetch(ServiceAPI);
       const data = await response.json();
      console.warn(data);
     const datap = await data.map(async (service) => {
-         const response = await fetch('http://localhost:5000/prestataires/' +service.PrestataireID);
+         const response = await fetch(PrestataireAPI +service.PrestataireID);
          if (!response.ok) {
           // get error message from body or default to response statusText
           const error = (data && data.message) || response.statusText;
@@ -62,13 +63,9 @@ export default class List extends React.Component {
          })
        })
        console.warn(datap);
-       datap.map((dat) =>{
-        
-
-       });
-      // this.setState({ people })
-     
-    //this.setState({ people: data.total })
+      const result=  datap.map((dat)=>{
+       return dat.then(value => {return this.setState({ people: [...this.state.people , value] })});
+       })
   }
    
 
