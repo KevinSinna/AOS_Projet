@@ -252,8 +252,8 @@ function genereAccessToken(prestataires){
  *      content:
  *       application/json:
  *        schema:
- *         email:String;
- *         password:String;
+ *         type: string
+ *         required: true
  *     responses:
  *       201:
  *         description: Prestataire connecté avec succès
