@@ -67,7 +67,6 @@ export default class List extends React.Component {
   }
    
 search(){
-this.setState(search: true);
  const profession =  document.getElementById("search").value;
 }
 
