@@ -75,7 +75,8 @@ const modelservices = require('../models/service')
 //Selectionner tout les services
 router.get('/', async (req, res) => {
   try{
-      const services = await modelservices.find();
+    const services = await modelservices.find()
+    //   const services = await modelservices.find();
       res.status(201).json(services);
   }catch (err){
       res.send(err)
@@ -84,13 +85,13 @@ router.get('/', async (req, res) => {
 
 /**
  * @swagger
- * /Services/{id}:
+ * /Services/{Service}:
  *   get:
  *     summary: Retourne le service en fonction de l'id
  *     tags: [Services]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: Service
  *         schema:
  *           type: string
  *         required: true
@@ -107,9 +108,12 @@ router.get('/', async (req, res) => {
  */
 
 //Selectionner un seul prestation
-router.get('/:id', async (req, res) =>{
+router.get('/:Service', async (req, res) =>{
   try {
-      const service = await modelservices.findById(req.params.id);
+      a = req.params.Service
+    
+    const service = await modelservices.find({Service: a})
+    //   const service = await modelservices.findById(req.params.id);
       res.status(200).json(service)
   } catch (err) {
       res.send(err)

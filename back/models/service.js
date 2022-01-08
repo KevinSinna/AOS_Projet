@@ -6,7 +6,7 @@ const serviceSchema = new mongoose.Schema({
     require:true
   },
   Service:{
-    type:[String],
+    type:String,
     require:true
   },
   DateDebut:{
@@ -18,7 +18,7 @@ const serviceSchema = new mongoose.Schema({
     require:true
 },
   Description:{
-  type:[String],
+  type:String,
   require:true
 },
 Status:{
