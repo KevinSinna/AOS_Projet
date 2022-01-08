@@ -10,7 +10,7 @@ function App() {
               <p> 
                   <h1 className="text-5xl">On vous aide !</h1>
                   <div className="text-xl mt-6"> 
-                      N'hésitez pas à prendre rendez-vous avec nos nombreux prestataire 
+                      N'hésitez pas à prendre rendez-vous avec nos nombreux prestataire !
                   </div>
               </p> 
           </div>
