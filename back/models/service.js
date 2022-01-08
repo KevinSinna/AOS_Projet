@@ -7,6 +7,7 @@ const serviceSchema = new mongoose.Schema({
   },
   Service:{
     type:String,
+    uppercase: true,
     require:true
   },
   DateDebut:{

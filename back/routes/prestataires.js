@@ -108,6 +108,43 @@ router.get('/:id', async (req, res) =>{
 
 /**
  * @swagger
+ * /Prestataires/Recherche/{Prestataires}:
+ *   get:
+ *     summary: Retourne le service en fonction de l'id
+ *     tags: [Prestataires]
+ *     parameters:
+ *       - in: path
+ *         name: service
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: prestation correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: Information sur le prestation avec l'id renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestataires'
+ *       404:
+ *         description: prestations non existant
+ */
+
+//Selectionner un seul prestation
+router.get('/Recherche/:Prestataires', async (req, res) =>{
+    try {
+      
+      const prestataire = await modelservices.find({service: req.params.service})
+      //   const service = await modelservices.findById(req.params.id);
+        res.status(200).json(prestataire)
+    } catch (err) {
+        res.send(err)
+    }
+  })
+
+
+/**
+ * @swagger
  * /prestataires:
  *   post:
  *     summary: crée un nouveau prestataire

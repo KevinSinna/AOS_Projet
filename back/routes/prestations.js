@@ -12,6 +12,7 @@ const modelprestations = require('../models/prestation')
  *       required:
  *        - ClientID
  *        - prestationsID
+ *        - ServiceID
  *        - service
  *        - date
  *        - adresse
@@ -21,6 +22,9 @@ const modelprestations = require('../models/prestation')
  *           type: ObjectId
  *           description: Numéro d'identifiant prestation auto généré 
  *         ClientID:
+ *           type: ObjectId
+ *           description: Id d'un client
+ *         ServiceID:
  *           type: ObjectId
  *           description: Id d'un client
  *         PrestationsID:
@@ -38,6 +42,7 @@ const modelprestations = require('../models/prestation')
  *       example:
  *         ClientID: 614b3555ca728a847b99a6d9
  *         PrestatairesID: 614c5b1b853b0d77a38863bb
+ *         ServiceID: 61d2eac308550eb6ed39c054
  *         service: plombier
  *         date: 2021:05:05
  *         adresse: 55 rue de la paix
@@ -139,6 +144,7 @@ router.post("/", async (req, res) => {
     const prestation = new modelprestations({
         ClientID: req.body.ClientID,
         PrestatairesID: req.body.PrestatairesID,
+        ServiceID: req.body.ServiceID,
         date: req.body.date,
         service: req.body.service,
         adresse: req.body.adresse
@@ -191,6 +197,7 @@ router.put("/:id",async (req, res) => {
             {$set: {
                 ClientID: req.body.ClientID,
                 prestationsID: req.body.prestationsID,
+                ServiceID: req.body.ServiceID,
                 date: req.body.date,
                 service: req.body.service
         }}
