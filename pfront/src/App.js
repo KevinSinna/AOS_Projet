@@ -7,7 +7,6 @@ function App() {
     <Switch>
     <Route path= "/" exact component={Home}/>
     <Route path= "/home" exact component={Home}/>
-    <Route exact path="/logout" render={() => (<div>logout</div>)} />
     </Switch>
   </BrowserRouter>
   );

@@ -140,9 +140,11 @@ router.get('/:id', async (req, res) =>{
  */
 
 //Selectionner un seul prestation
-router.get('recherche/:service', async (req, res) =>{
+router.get('/Recherche/:Service', async (req, res) =>{
     try {
-        const service = await modelservices.findById(req.params.service);
+
+      const service = await modelservices.find({Service: req.params.Service})
+      //   const service = await modelservices.findById(req.params.id);
         res.status(200).json(service)
     } catch (err) {
         res.send(err)

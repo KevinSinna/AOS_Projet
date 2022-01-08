@@ -24,7 +24,7 @@ import image from "../../assets/img/persotest.png"
 ]*/
 const ServiceAPI = 'http://localhost:7000/Services';
 const PrestataireAPI = 'http://localhost:5000/prestataires/';
-const SearchAPI = 'http://localhost:7000/Services/service/';
+const SearchAPI = 'http://localhost:7000/Services/recherche/';
 export default class List extends React.Component {
 
   constructor(props){
@@ -54,7 +54,7 @@ export default class List extends React.Component {
       }
          const prestataire = await response.json();
          return ({name: prestataire.nom + ' '+ prestataire.prenom,
-         title: service.Service[0],
+         title: service.Service,
          department: prestataire.code_postal,
          role: 'Préstataire',
          email: prestataire.email,
@@ -81,7 +81,7 @@ const datap = await data.map(async (service) => {
  }
     const prestataire = await response.json();
     return ({name: prestataire.nom + ' '+ prestataire.prenom,
-    title: service.Service[0],
+    title: service.Service,
     department: prestataire.code_postal,
     role: 'Préstataire',
     email: prestataire.email,
@@ -89,9 +89,14 @@ const datap = await data.map(async (service) => {
     '../../assets/img/persotest.png'
     })
   })
-  datap.map((dat)=>{
-   dat.then(value => { this.setState({ people: [...this.state.people , value] })});
-  })
+ console.warn(datap);
+ datap.map( (data)=>{
+data.then((value)=> {
+   this.setState({
+  people: [...this.state.people , value]
+ })});
+
+ })
 }
 
   componentWillUnmount() {  }
