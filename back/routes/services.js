@@ -117,7 +117,7 @@ router.get('/:id', async (req, res) =>{
 })
 /**
  * @swagger
- * /Services/{service}:
+ * /Services/recherche/{service}:
  *   get:
  *     summary: Retourne le service en fonction du service
  *     tags: [Services]
@@ -140,7 +140,7 @@ router.get('/:id', async (req, res) =>{
  */
 
 //Selectionner un seul prestation
-router.get('/:service', async (req, res) =>{
+router.get('recherche/:service', async (req, res) =>{
     try {
         const service = await modelservices.findById(req.params.service);
         res.status(200).json(service)

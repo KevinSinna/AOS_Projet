@@ -23,7 +23,8 @@ import image from "../../assets/img/persotest.png"
   // More people...
 ]*/
 const ServiceAPI = 'http://localhost:7000/Services';
-const PrestataireAPI = 'http://localhost:5000/prestataires/'
+const PrestataireAPI = 'http://localhost:5000/prestataires/';
+const SearchAPI = 'http://localhost:7000/Services/service/';
 export default class List extends React.Component {
 
   constructor(props){
@@ -52,8 +53,8 @@ export default class List extends React.Component {
           return Promise.reject(error);
       }
          const prestataire = await response.json();
-         return ({name: prestataire.nom,
-         title: 'Plombier',
+         return ({name: prestataire.nom + ' '+ prestataire.prenom,
+         title: service.Service[0],
          department: prestataire.code_postal,
          role: 'Préstataire',
          email: prestataire.email,
@@ -66,8 +67,31 @@ export default class List extends React.Component {
        })
   }
    
-search(){
+async search(){
+ // GET request using fetch with async/await
  const profession =  document.getElementById("search").value;
+ const response = await fetch(SearchAPI + profession);
+ const data = await response.json();
+const datap = await data.map(async (service) => {
+    const response = await fetch(PrestataireAPI +service.PrestataireID);
+    if (!response.ok) {
+     // get error message from body or default to response statusText
+     const error = (data && data.message) || response.statusText;
+     return Promise.reject(error);
+ }
+    const prestataire = await response.json();
+    return ({name: prestataire.nom + ' '+ prestataire.prenom,
+    title: service.Service[0],
+    department: prestataire.code_postal,
+    role: 'Préstataire',
+    email: prestataire.email,
+    image:
+    '../../assets/img/persotest.png'
+    })
+  })
+  datap.map((dat)=>{
+   dat.then(value => { this.setState({ people: [...this.state.people , value] })});
+  })
 }
 
   componentWillUnmount() {  }
