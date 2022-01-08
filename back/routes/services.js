@@ -9,18 +9,20 @@ const modelservices = require('../models/service')
  *     Services:
  *       type: object
  *       required:
+ *        - id
  *        - PrestataireID
  *        - Service
  *        - DateDebut
  *        - DateFin
  *        - Description
+ *        - Status
  *       properties:
  *         id:
  *           type: ObjectId
  *           description: Numéro d'identifiant service auto généré 
- *         PrestatairesID:
+ *         PrestataireID:
  *           type: ObjectId
- *           Description: Id d'un prestataire
+ *           description: Id d'un prestataire
  *         Service:
  *           type: [string]
  *           description: service rendue
@@ -33,12 +35,16 @@ const modelservices = require('../models/service')
  *         Description:
  *           type: String
  *           description: Description du service 
+ *         Status:
+ *          type: String
+ *          description: Status du service
  *       example:
  *         PrestatairesID: 61d40d3e312c4dbb6f686e35
  *         Service: plombier
  *         DateDebut: 2021:05:05
  *         DateFin: 2021:06:07
  *         Description: Plompier avec 20 ans expérience
+ *         Status: Active
  *         
  */
 
@@ -109,6 +115,40 @@ router.get('/:id', async (req, res) =>{
       res.send(err)
   }
 })
+/**
+ * @swagger
+ * /Services/{service}:
+ *   get:
+ *     summary: Retourne le service en fonction du service
+ *     tags: [Services]
+ *     parameters:
+ *       - in: path
+ *         name: service
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: prestation correspondant au service
+ *     responses:
+ *       200:
+ *         description: Information sur le prestation avec le service renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Service'
+ *       404:
+ *         description: prestations non existant
+ */
+
+//Selectionner un seul prestation
+router.get('/:service', async (req, res) =>{
+    try {
+        const service = await modelservices.findById(req.params.service);
+        res.status(200).json(service)
+    } catch (err) {
+        res.send(err)
+    }
+  })
+  
 
 /**
  * @swagger
@@ -140,7 +180,8 @@ router.post("/", async (req, res) => {
       DateDebut: req.body.DateDebut,
       DateFin: req.body.DateFin,
       Description: req.body.Description,
-      Service: req.body.Service
+      Service: req.body.Service,
+      Status : req.body.Status
   })
   try{
       const newService = await service.save();
@@ -195,7 +236,7 @@ router.post("/", async (req, res) => {
  *         schema:
  *          type: string
  *          required: true
- *          description: ID du client 
+ *          description: ID du service
  *     requestBody:
  *      required: true
  *      content:
@@ -225,7 +266,8 @@ router.post("/", async (req, res) => {
                 DateDebut: req.body.DateDebut,
                 DateFin: req.body.DateFin,
                 Description: req.body.Description,
-                Service: req.body.Service
+                Service: req.body.Service,
+                Status : req.body.Status
           }}
           );
           res.send();

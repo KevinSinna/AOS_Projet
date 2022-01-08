@@ -32,6 +32,15 @@ const options = {
             {
               url: "http://localhost:5000",
             },
+            {
+              url: "http://localhost:7500",
+            },
+            {
+              url: "http://localhost:4000",
+            },
+            {
+              url: "http://localhost:7000",
+            },
         ],
       },
     apis: ["./routes/*.js"],

@@ -30,7 +30,16 @@ const options = {
         },
         servers: [ 
             {
-              url: "http://localhost:6000",
+              url: "http://localhost:5000",
+            },
+            {
+              url: "http://localhost:7500",
+            },
+            {
+              url: "http://localhost:4000",
+            },
+            {
+              url: "http://localhost:7000",
             },
         ],
       },

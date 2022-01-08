@@ -21,6 +21,10 @@ const serviceSchema = new mongoose.Schema({
   type:[String],
   require:true
 },
+Status:{
+  type:String,
+  require:true
+},
 })
 
 module.exports = mongoose.model('Services',serviceSchema,"Service")
