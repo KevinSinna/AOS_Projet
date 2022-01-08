@@ -14,17 +14,30 @@ const prestataire = require("../models/prestataire");
  * @swagger
  * components:
  *   schemas:
+ *     Connexion:
+ *       type: object
+ *       required:
+ *        - email
+ *        - motdepasse 
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: email d'un prestataire
+ *         motdepasse:
+ *           type: string
+ *           description: mot de passe d'un prestataire
+ *       example:
+ *         email: jules.laporte@gmail.com
+ *         motdepasse : Mypassword       
  *     Prestataires:
  *       type: object
  *       required:
  *        - nom
  *        - prenom
- *        - code_postal
+ *        - email 
+ *        - adresse
  *        - service
  *       properties:
- *         id:
- *           type: number
- *           description: Numéro d'identifiant prestataire auto généré 
  *         nom:
  *           type: string
  *           description: Nom d'un prestataire
@@ -37,9 +50,9 @@ const prestataire = require("../models/prestataire");
  *         motdepasse:
  *           type: string
  *           description: Mot de passe d'un prestataire  
- *         code_postal:
- *           type: number
- *           description: Code postale du prestataire
+ *         adresse:
+ *           type: object
+ *           description: Adresse du prestataire
  *         service:
  *           type: [string]
  *           description: Liste des services proposé par le prestataire 
@@ -49,7 +62,10 @@ const prestataire = require("../models/prestataire");
  *         prenom: Jules
  *         email: jules.laporte@gmail.com
  *         motdepasse : Mypassword 
- *         code_postal: 91100
+ *         adresse:
+ *          rue: 42 rue de la gare
+ *          ville: Evry
+ *          codePostal: 91100
  *         service: plombier
  */
 
@@ -80,7 +96,7 @@ const prestataire = require("../models/prestataire");
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postal','service']);
+        const prestataires = await modelPrestataires.find().select(['nom','prenom','adresse','service']);
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
@@ -151,7 +167,7 @@ router.post("/", async (req, res) => {
         prenom: req.body.prenom,
         email: req.body.email,
         motdepasse: req.body.motdepasse,
-        code_postal: req.body.code_postal,
+        adresse: req.body.adresse,
         service: req.body.service
     })
     try{
@@ -193,7 +209,7 @@ router.put("/:id",async (req, res) => {
             {_id: req.params.id},
             {$set: {nom: req.body.nom ,
             prenom: req.body.prenom ,
-            code_postal: req.body.code_postal ,
+            adresse: req.body.adresse ,
             service: req.body.service}}
         );
         res.send();
@@ -252,8 +268,7 @@ function genereAccessToken(prestataires){
  *      content:
  *       application/json:
  *        schema:
- *         type: string
- *         required: true
+ *         $ref: '#/components/schemas/Connexion'
  *     responses:
  *       201:
  *         description: Prestataire connecté avec succès
@@ -262,7 +277,7 @@ function genereAccessToken(prestataires){
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Prestataires'
+ *                 $ref: '#/components/schemas/Connexion'
  *       401:
  *          description: Information incorrecte 
  */
