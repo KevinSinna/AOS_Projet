@@ -2,31 +2,57 @@ const express = require("express");
 // const prestataires = require("../models/prestataire");
 const router = express.Router()
 const modelPrestataires = require('../models/prestataire')
+//Crypte mdp
+const bcrypt = require("bcrypt");
+// Token de connexion
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const { find, findOne } = require("../models/prestataire");
+const prestataire = require("../models/prestataire");
 
 /**
  * @swagger
  * components:
  *   schemas:
+ *     Connexion:
+ *       type: object
+ *       required:
+ *        - email
+ *        - motdepasse 
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: email d'un prestataire
+ *         motdepasse:
+ *           type: string
+ *           description: mot de passe d'un prestataire
+ *       example:
+ *         email: jules.laporte@gmail.com
+ *         motdepasse : Mypassword       
  *     Prestataires:
  *       type: object
  *       required:
  *        - nom
  *        - prenom
- *        - code_postale
+ *        - email 
+ *        - adresse
  *        - service
  *       properties:
- *         id:
- *           type: number
- *           description: Numéro d'identifiant prestataire auto généré 
  *         nom:
  *           type: string
  *           description: Nom d'un prestataire
  *         prenom:
  *           type: string
  *           description: Prenom d'un prestataire
- *         code_postale:
+ *         email:
  *           type: string
- *           description: Code postale du prestataire
+ *           description: Email d'un prestataire
+ *         motdepasse:
+ *           type: string
+ *           description: Mot de passe d'un prestataire  
+ *         adresse:
+ *           type: object
+ *           description: Adresse du prestataire
  *         service:
  *           type: [string]
  *           description: Liste des services proposé par le prestataire 
@@ -34,7 +60,12 @@ const modelPrestataires = require('../models/prestataire')
  *         id: 4524824653
  *         nom: LaPorte
  *         prenom: Jules
- *         code_postale: 91100
+ *         email: jules.laporte@gmail.com
+ *         motdepasse : Mypassword 
+ *         adresse:
+ *          rue: 42 rue de la gare
+ *          ville: Evry
+ *          codePostal: 91100
  *         service: plombier
  */
 
@@ -65,7 +96,7 @@ const modelPrestataires = require('../models/prestataire')
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postale','service']);
+        const prestataires = await modelPrestataires.find().select(['nom','prenom','adresse','service']);
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
@@ -149,6 +180,12 @@ router.get('/Recherche/:Prestataires', async (req, res) =>{
  *   post:
  *     summary: crée un nouveau prestataire
  *     tags: [Prestataires]
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Prestataires'
  *     responses:
  *       201:
  *         description: Prestataire ajouté avec succé
@@ -165,7 +202,9 @@ router.post("/", async (req, res) => {
     const prestataire = new modelPrestataires({
         nom: req.body.nom,
         prenom: req.body.prenom,
-        code_postale: req.body.code_postale,
+        email: req.body.email,
+        motdepasse: req.body.motdepasse,
+        adresse: req.body.adresse,
         service: req.body.service
     })
     try{
@@ -207,7 +246,7 @@ router.put("/:id",async (req, res) => {
             {_id: req.params.id},
             {$set: {nom: req.body.nom ,
             prenom: req.body.prenom ,
-            code_postale: req.body.code_postale ,
+            adresse: req.body.adresse ,
             service: req.body.service}}
         );
         res.send();
@@ -248,5 +287,60 @@ try{
     res.send(err)
 }
 })
+
+
+//generation du token
+function genereAccessToken(prestataires){
+    return jwt.sign(prestataires,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'1800s'});
+  }
+
+/**
+ * @swagger
+ * /prestataires/connexion:
+ *   post:
+ *     summary: Authentification
+ *     tags: [Prestataires]
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Connexion'
+ *     responses:
+ *       201:
+ *         description: Prestataire connecté avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Connexion'
+ *       401:
+ *          description: Information incorrecte 
+ */
+
+router.post('/connexion', async(req, res) => {
+    try{
+      // si Email existe dans le mot de passe et que le mot de passe ecrit correspond alors on donne le token d'accés 
+    const { email, motdepasse } = req.body
+    const presta = await prestataire.findOne({ email }).lean()
+        if (!presta) {
+            console.log("EMAIL PAS BON");
+            return res.status(401).send('email invalide');
+        }
+
+       if(req.body.motdepasse != presta.motdepasse){
+        return res.status(401).send("Informations invalide");
+       }
+    //Generation du token si tout va bien
+    const accessToken = genereAccessToken(presta);
+    console.log(accessToken);
+    res.status(201).send(accessToken);
+  
+    }catch (err){
+      res.send(err)    
+    }
+  });
+
 
 module.exports = router;

@@ -3,20 +3,38 @@ const { ClientSession } = require("mongodb");
 // const clients = require("../models/clients");
 const router = express.Router()
 const modelclients = require('../models/client')
+// Token de connexion
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 /**
  * @swagger
  * components:
  *   schemas:
+ *     Connexion:
+ *       type: object
+ *       required:
+ *        - email
+ *        - motdepasse 
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: email d'un client
+ *         motdepasse:
+ *           type: string
+ *           description: mot de passe d'un client
+ *       example:
+ *         email: julius@gmail.com
+ *         motdepasse : juliuspassword  
  *     Clients:
  *       type: object
  *       required:
  *        - nom
  *        - prenom
+ *        - motdepasse
  *        - adresse
- *        - code_postal
- *        - adresse_mail
- *        - telephone
+ *        - email
+ *        - date_de_naissance
  *       properties:
  *         id:
  *           type: number
@@ -27,26 +45,29 @@ const modelclients = require('../models/client')
  *         prenom:
  *           type: string
  *           description: Prenom du client
- *         adresse:
+ *         motdepasse:
  *           type: string
+ *           description: Mot de passe du client
+ *         adresse:
+ *           type: object
  *           description: Prenom du client
- *         code_postal:
- *           type: number
- *           description: Code postale du client
- *         adresse_mail:
+ *         email:
  *           type: string
  *           description: Adresse mail du client
- *         telephone:
- *           type: int
- *           description: Numéro de telephone du client
+ *         date_de_naissance:
+ *           type: date
+ *           decritpion: Date de naissance du client
  *       example:
- *         id: 782123210x
+ *         id: 78212321025
  *         nom: Amadeus
  *         prenom: Julius
- *         adresse_mail: julius@gmail.com
- *         adresse: 14 rue de la gare
- *         code_postal: 91100
- *         telephone: 0132439586
+ *         motdepasse: juliuspassword
+ *         date_de_naissance: 1997-10-10
+ *         email: julius@gmail.com
+ *         adresse: 
+ *          rue: 93 bis rue de la metropole
+ *          ville: Buisance
+ *          codePostal: 75010
  */
 
 /**
@@ -146,13 +167,12 @@ router.post("/", async (req, res) => {
     const client = new modelclients({
         nom: req.body.nom ,
         prenom: req.body.prenom ,
-        code_postal: req.body.code_postal,
+        adresse: req.body.adresse,
+        motdepasse: req.body.motdepasse,
         pseudo: req.body.pseudo,
         adresse: req.body.adresse,
-        complement_adresse: req.body.complement_adresse,
-        adresse_mail: req.body.adresse_mail,
-        date_de_naissance: req.body.date_de_naissance,
-        telephone : req.body.telephone
+        email: req.body.email,
+        date_de_naissance: req.body.date_de_naissance
     })
     try{
         const newPrestaire = await client.save();
@@ -203,13 +223,12 @@ router.put("/:id",async (req, res) => {
               {$set: {
                 nom: req.body.nom ,
                 prenom: req.body.prenom ,
-                code_postal: req.body.code_postal,
+                adresse: req.body.adresse,
                 pseudo: req.body.pseudo,
                 adresse: req.body.adresse,
                 complement_adresse: req.body.complement_adresse,
-                adresse_mail: req.body.adresse_mail,
-                date_de_naissance: req.body.date_de_naissance,
-                telephone : req.body.telephone
+                email: req.body.email,
+                date_de_naissance: req.body.date_de_naissance
             }}
           );
           res.send();
@@ -249,5 +268,59 @@ try{
 }
 })
 
+
+
+//generation du token
+function genereAccessToken(clientcourant){
+    return jwt.sign(clientcourant,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'1800s'});
+  }
+
+/**
+ * @swagger
+ * /clients/connexion:
+ *   post:
+ *     summary: Authentification
+ *     tags: [Clients]
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Connexion'
+ *     responses:
+ *       201:
+ *         description: Client connecté avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Connexion'
+ *       401:
+ *          description: Information incorrecte 
+ */
+
+router.post('/connexion', async(req, res) => {
+    try{
+      // si Email existe dans le mot de passe et que le mot de passe ecrit correspond alors on donne le token d'accés 
+    const { email, motdepasse } = req.body
+    const clientcourant = await modelclients.findOne({ email }).lean()
+        if (!clientcourant) {
+            console.log("EMAIL PAS BON");
+            return res.status(401).send('email invalide');
+        }
+
+       if(req.body.motdepasse != clientcourant.motdepasse){
+        return res.status(401).send("Informations invalide");
+       }
+    //Generation du token si tout va bien
+    const accessToken = genereAccessToken(clientcourant);
+    console.log(accessToken);
+    res.status(201).send(accessToken);
+  
+    }catch (err){
+      res.send(err)    
+    }
+  });
 
 module.exports = router;
