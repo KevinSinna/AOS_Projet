@@ -115,6 +115,40 @@ router.get('/:id', async (req, res) =>{
       res.send(err)
   }
 })
+/**
+ * @swagger
+ * /Services/{service}:
+ *   get:
+ *     summary: Retourne le service en fonction du service
+ *     tags: [Services]
+ *     parameters:
+ *       - in: path
+ *         name: service
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: prestation correspondant au service
+ *     responses:
+ *       200:
+ *         description: Information sur le prestation avec le service renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Service'
+ *       404:
+ *         description: prestations non existant
+ */
+
+//Selectionner un seul prestation
+router.get('/:service', async (req, res) =>{
+    try {
+        const service = await modelservices.findById(req.params.service);
+        res.status(200).json(service)
+    } catch (err) {
+        res.send(err)
+    }
+  })
+  
 
 /**
  * @swagger
