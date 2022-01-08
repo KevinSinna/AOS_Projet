@@ -180,7 +180,7 @@ router.get('/Recherche/:Service', async (req, res) =>{
 router.get('/Recherche/Service/:Service', async (req, res) =>{
     try {
         
-      const service = await (modelservices.find({Service: req.params.Service}).select(['DateDebut']));
+      const service = await (modelservices.find({Service: req.params.Service}));
       //   const service = await modelservices.findById(req.params.id);
         res.status(200).json(service)
     } catch (err) {

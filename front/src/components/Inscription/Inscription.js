@@ -147,7 +147,6 @@ export default class Inscription extends React.Component{
               </button>
             </div>
           </form>
-          <button onClick={this.registrer}>test</button>
         </div>
       </div>
     </>

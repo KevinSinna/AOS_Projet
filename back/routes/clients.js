@@ -40,7 +40,7 @@ const modelclients = require('../models/client')
  *           type: int
  *           description: Numéro de telephone du client
  *       example:
- *         id: 78212321025
+ *         id: 782123210x
  *         nom: Amadeus
  *         prenom: Julius
  *         adresse_mail: julius@gmail.com
