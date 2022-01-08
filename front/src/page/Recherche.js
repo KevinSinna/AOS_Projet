@@ -2,33 +2,12 @@ import React from "react";
 import NavBar from '../components/NavBar/Navbar2'
 import List from '../components/List/List'
 function Recherche() {
-    const people = [
-        {
-          name: 'Badr Cooper',
-          title: 'Technicien',
-          department: 'Villepinte',
-          role: 'Admin',
-          email: 'test@example.com',
-          image:
-          '../../assets/img/persotest.png',
-        },
-        {
-            name: 'Badr Cooper',
-            title: 'Technicien',
-            department: 'Villepinte',
-            role: 'Admin',
-            email: 'test@example.com',
-            image:
-            '../../assets/img/persotest.png',
-          }
-        // More people...
-      ]
   return (
     <div className="min-h-screen bg-pack-train bg-cover bg-center flex flex-col bg-fixed text-white">
     <NavBar></NavBar>
           <div className="text-center  font-sans tracking-wide align-middle mt-20">
               <p> 
-                  <h1 className="text-5xl">On vous aide ! {people.name}</h1>
+                  <h1 className="text-5xl">On vous aide !</h1>
                   <div className="text-xl mt-6"> 
                       N'hésitez pas à prendre rendez-vous avec nos nombreux prestataire 
                   </div>

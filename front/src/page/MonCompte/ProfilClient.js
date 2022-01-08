@@ -9,7 +9,10 @@
       return (
           <div>
               <Navbar/>
-              <Dashboard/><TableauReservation/>
+              
+
+              <div className='flex flex-row '>
+              <Dashboard/><TableauReservation/></div>
           </div>
       );
   };

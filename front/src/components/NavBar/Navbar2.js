@@ -19,9 +19,6 @@ import {
 } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-import { NavLink } from 'react-router-dom';
-
-
 const callsToAction = [
 
   { name: 'Contactez-nous', href: '#', icon: PhoneIcon },
@@ -53,10 +50,10 @@ export default function Navbar() {
       <div className="max-w-7xl max-h-1xl mx-auto px-4 sm:px-6 ">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1 text-blue-700 text-3xl">
-          <NavLink exact to= "/" activeClassName="nav-active">
+            <a href="./home">
               <span className="sr-only">Home</span>
               Helfen
-            </NavLink>
+            </a>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -69,10 +66,9 @@ export default function Navbar() {
             <a href="./recherche" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Recherche
             </a>
-            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <a href="./moncompte" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Mon Profil
             </a>
-                      
 
             <Popover className="relative">
               {({ open }) => (
