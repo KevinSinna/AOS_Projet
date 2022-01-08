@@ -1,5 +1,4 @@
 import React from 'react';
-import Prestationprofil from '../../components/Profil/Prestationencours';
 
 
 export default function PP() {

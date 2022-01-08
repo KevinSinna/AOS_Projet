@@ -16,6 +16,7 @@ import moncompte from './page/MonCompte/Moncompte'
 import InfoClient from './components/Profil/InfoClient';
 import Agenda from './page/MonCompte/Agenda';
 import ProfilPresta from './page/MonCompte/ProfilPrestataire';
+import rdv from './page/NouveauTicket';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
       <Route path= "/moncompte" exact component={moncompte}/>
       <Route path= "/agenda" exact component={Agenda}/>
       <Route path= "/profil-prestataire" exact component={ProfilPresta}/>
-
+      <Route path= "/rdv" exact component={rdv}/>
     </Switch>
   </BrowserRouter>
   )}
