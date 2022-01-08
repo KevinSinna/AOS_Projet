@@ -55,7 +55,7 @@ export default class List extends React.Component {
          const prestataire = await response.json();
          return ({name: prestataire.nom + ' '+ prestataire.prenom,
          title: service.Service,
-         department: prestataire.code_postal,
+         department: prestataire.adresse.code_postal,
          role: 'Préstataire',
          email: prestataire.email,
          image:
@@ -90,13 +90,7 @@ const datap = await data.map(async (service) => {
     })
   })
  console.warn(datap);
- datap.map( (data)=>{
-data.then((value)=> {
-   this.setState({
-  people: [...this.state.people , value]
- })});
-
- })
+ 
 }
 
   componentWillUnmount() {  }

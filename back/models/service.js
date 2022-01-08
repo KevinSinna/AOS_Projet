@@ -19,7 +19,7 @@ const serviceSchema = new mongoose.Schema({
     require:true
 },
   Description:{
-  type:[String],
+  type:String,
   require:true
 },
 Status:{

@@ -9,6 +9,10 @@ const prestationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     require:true
   },
+  ServiceID:{
+    type: mongoose.Schema.Types.ObjectId,
+    require:true
+  },
   service:{
     type:[String],
     require:true
