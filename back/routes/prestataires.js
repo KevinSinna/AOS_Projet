@@ -19,7 +19,7 @@ const prestataire = require("../models/prestataire");
  *       required:
  *        - nom
  *        - prenom
- *        - code_postale
+ *        - code_postal
  *        - service
  *       properties:
  *         id:
@@ -31,8 +31,14 @@ const prestataire = require("../models/prestataire");
  *         prenom:
  *           type: string
  *           description: Prenom d'un prestataire
- *         code_postale:
+ *         email:
  *           type: string
+ *           description: Email d'un prestataire
+ *         motdepasse:
+ *           type: string
+ *           description: Mot de passe d'un prestataire  
+ *         code_postal:
+ *           type: number
  *           description: Code postale du prestataire
  *         service:
  *           type: [string]
@@ -41,7 +47,9 @@ const prestataire = require("../models/prestataire");
  *         id: 4524824653
  *         nom: LaPorte
  *         prenom: Jules
- *         code_postale: 91100
+ *         email: jules.laporte@gmail.com
+ *         motdepasse : Mypassword 
+ *         code_postal: 91100
  *         service: plombier
  */
 
@@ -72,7 +80,7 @@ const prestataire = require("../models/prestataire");
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postale','service']);
+        const prestataires = await modelPrestataires.find().select(['nom','prenom','code_postal','service']);
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
@@ -119,6 +127,12 @@ router.get('/:id', async (req, res) =>{
  *   post:
  *     summary: crée un nouveau prestataire
  *     tags: [Prestataires]
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Prestataires'
  *     responses:
  *       201:
  *         description: Prestataire ajouté avec succé
@@ -137,7 +151,7 @@ router.post("/", async (req, res) => {
         prenom: req.body.prenom,
         email: req.body.email,
         motdepasse: req.body.motdepasse,
-        code_postale: req.body.code_postale,
+        code_postal: req.body.code_postal,
         service: req.body.service
     })
     try{
@@ -179,7 +193,7 @@ router.put("/:id",async (req, res) => {
             {_id: req.params.id},
             {$set: {nom: req.body.nom ,
             prenom: req.body.prenom ,
-            code_postale: req.body.code_postale ,
+            code_postal: req.body.code_postal ,
             service: req.body.service}}
         );
         res.send();
@@ -226,6 +240,32 @@ try{
 function genereAccessToken(prestataires){
     return jwt.sign(prestataires,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'1800s'});
   }
+
+/**
+ * @swagger
+ * /prestataires/connexion:
+ *   post:
+ *     summary: Authentification
+ *     tags: [Prestataires]
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         email:String;
+ *         password:String;
+ *     responses:
+ *       201:
+ *         description: Prestataire connecté avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Prestataires'
+ *       401:
+ *          description: Information incorrecte 
+ */
 
 router.post('/connexion', async(req, res) => {
     try{
