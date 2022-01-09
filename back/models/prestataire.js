@@ -9,10 +9,28 @@ const prestatairesSchema = new mongoose.Schema({
     type:String,
     require:true
   },
-  code_postal:{
-    type: Number,
+  email:{
+    type:String,
     require:true
   },
+  motdepasse:{
+    type:String,
+    require:true
+  },
+  adresse:{
+    rue:{
+      type: String,
+      require:true,
+    },
+      ville:{
+        type: String,
+        require:true
+      },
+      codePostal:{
+        type:Number,
+        require:true
+      }
+    },
   service:{
     type:[String],
     require:true

@@ -9,6 +9,10 @@ const clientSchema = new mongoose.Schema({
     type:String,
     require:true
   },
+  motdepasse:{
+    type:String,
+    require:true
+  },
   code_postal:{
     type: Number,
     require:true
@@ -20,13 +24,23 @@ const clientSchema = new mongoose.Schema({
     type: String
   },
   adresse:{
-    type: String,
-    require: true
-  },
+    rue:{
+      type: String,
+      require:true,
+    },
+      ville:{
+        type: String,
+        require:true
+      },
+      codePostal:{
+        type:Number,
+        require:true
+      }
+    },
   complement_adresse:{
     type: String
   },
-  adresse_mail:{
+  email:{
     type: String,
     require: true
   },
