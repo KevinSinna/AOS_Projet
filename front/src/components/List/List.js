@@ -30,15 +30,10 @@ export default class List extends React.Component {
   constructor(props){
     super(props);   
     this.state={
-      people:[{name: 'Badr Cooper',
-      title: 'Technicien',
-      department: 'Villepinte',
-      role: 'Admin',
-      email: 'test@example.com',
-      image:
-      '../../assets/img/persotest.png'}],
+      people:[],
       search : false
     }
+    this.search = this.search.bind(this);
   }
  
   async componentDidMount() {
@@ -68,6 +63,7 @@ export default class List extends React.Component {
   }
    
 async search(){
+  this.setState({people:[]});
  // GET request using fetch with async/await
  const profession =  document.getElementById("search").value;
  const response = await fetch(SearchAPI + profession);
@@ -90,7 +86,9 @@ const datap = await data.map(async (service) => {
     })
   })
  console.warn(datap);
- 
+ datap.map((dat)=>{
+  dat.then(value => { this.setState({ people: [...this.state.people , value] })});
+ })
 }
 
   componentWillUnmount() {  }

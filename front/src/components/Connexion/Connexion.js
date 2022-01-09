@@ -1,15 +1,19 @@
 import React from "react"
 import image from "../../assets/img/logo.png"
-const API_URL ="http://localhost:5000";
+const API_URL ="http://localhost:4000";
 let browserHistory
 try {
   browserHistory = require('react-router').browserHistory
 } catch (e) {}
 export default class Connexion extends React.Component {
-
-  loginUser({ email, password }) {
+constructor(props){
+  super(props);
+  this.handleConnexion = this.handleConnexion.bind(this);
+}
+  loginUser({ email, motdepasse }) {
+    console.log("en cours");
     return function() {
-        fetch.post(`${API_URL}/Clients/connexion/`, { email, password }, { withCredentials: true })
+        fetch.post(`${API_URL}/clients/connexion/`, { email, motdepasse })
             .then((response) => {
                     localStorage.setItem("token", JSON.stringify(response.token))    
                         browserHistory.Push("/home");
@@ -20,12 +24,13 @@ export default class Connexion extends React.Component {
             });
     }
 }
-async connexion(){
+async handleConnexion(){
+  console.log("connexion");
  const person = { 
    email : document.getElementById("email").value,
-   password : document.getElementById("password").value,
+   motdepasse : document.getElementById("password").value,
   }
-  await this.loginUser(person.email,person.password);
+  await this.loginUser(person.email,person.motdepasse);
 
 } 
 
@@ -49,8 +54,7 @@ async connexion(){
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" defaultValue="true" />
+          <form className="mt-8 space-y-6">
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email-address" className="sr-only">
@@ -104,8 +108,7 @@ async connexion(){
 
             <div>
               <button
-              onClick={this.connexion}
-                type="submit"
+              onClick={this.handleConnexion}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -115,6 +118,7 @@ async connexion(){
               </button>
             </div>
           </form>
+          <button onClick={this.handleConnexion}>test</button>
         </div>
       </div>
     </>
