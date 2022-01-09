@@ -1,27 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React from "react"
 import image from "../../assets/img/persotest.png"
-/*const people = [
-  {
-    name: 'Badr Cooper',
-    title: 'Technicien',
-    department: 'Villepinte',
-    role: 'Admin',
-    email: 'test@example.com',
-    image:
-    '../../assets/img/persotest.png',
-  },
-  {
-    name: 'Badr Cooper',
-    title: 'Technicien',
-    department: 'Villepinte',
-    role: 'Admin',
-    email: 'test@example.com',
-    image:
-    '../../assets/img/persotest.png',
-  },
-  // More people...
-]*/
 const ServiceAPI = 'http://localhost:7000/Services';
 const PrestataireAPI = 'http://localhost:5000/prestataires/';
 const SearchAPI = 'http://localhost:7000/Services/recherche/';
@@ -34,9 +13,12 @@ export default class List extends React.Component {
       search : false
     }
     this.search = this.search.bind(this);
+    this.init = this.init.bind(this);
   }
- 
   async componentDidMount() {
+    this.init();
+  }
+  async init() {
       // GET request using fetch with async/await
       const response = await fetch(ServiceAPI);
       const data = await response.json();
@@ -63,9 +45,11 @@ export default class List extends React.Component {
   }
    
 async search(){
-  this.setState({people:[]});
+
  // GET request using fetch with async/await
  const profession =  document.getElementById("search").value;
+ if(profession !=""){
+ this.setState({people:[]});
  const response = await fetch(SearchAPI + profession);
  const data = await response.json();
 const datap = await data.map(async (service) => {
@@ -89,6 +73,9 @@ const datap = await data.map(async (service) => {
  datap.map((dat)=>{
   dat.then(value => { this.setState({ people: [...this.state.people , value] })});
  })
+}else{
+  this.init();
+}
 }
 
   componentWillUnmount() {  }
