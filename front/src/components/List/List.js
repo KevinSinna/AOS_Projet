@@ -55,7 +55,7 @@ export default class List extends React.Component {
          const prestataire = await response.json();
          return ({name: prestataire.nom + ' '+ prestataire.prenom,
          title: service.Service,
-         department: prestataire.adresse.code_postal,
+         department: prestataire.adresse.ville,
          role: 'Préstataire',
          email: prestataire.email,
          image:
@@ -82,7 +82,7 @@ const datap = await data.map(async (service) => {
     const prestataire = await response.json();
     return ({name: prestataire.nom + ' '+ prestataire.prenom,
     title: service.Service,
-    department: prestataire.code_postal,
+    department: prestataire.adresse.ville,
     role: 'Préstataire',
     email: prestataire.email,
     image:

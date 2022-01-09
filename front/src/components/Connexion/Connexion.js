@@ -1,6 +1,35 @@
+import React from "react"
 import image from "../../assets/img/logo.png"
+const API_URL ="http://localhost:5000";
+let browserHistory
+try {
+  browserHistory = require('react-router').browserHistory
+} catch (e) {}
+export default class Connexion extends React.Component {
 
-export default function Connexion() {
+  loginUser({ email, password }) {
+    return function() {
+        fetch.post(`${API_URL}/Clients/connexion/`, { email, password }, { withCredentials: true })
+            .then((response) => {
+                    localStorage.setItem("token", JSON.stringify(response.token))    
+                        browserHistory.Push("/home");
+                } 
+            )
+            .catch(() => {
+               console.log('Incorrect Login Info');
+            });
+    }
+}
+async connexion(){
+ const person = { 
+   email : document.getElementById("email").value,
+   password : document.getElementById("password").value,
+  }
+  await this.loginUser(person.email,person.password);
+
+} 
+
+  render(){
   return (
     <>
 
@@ -28,7 +57,7 @@ export default function Connexion() {
                   Addresse Mail
                 </label>
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -75,6 +104,7 @@ export default function Connexion() {
 
             <div>
               <button
+              onClick={this.connexion}
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
@@ -89,4 +119,5 @@ export default function Connexion() {
       </div>
     </>
   )
+}
 }
