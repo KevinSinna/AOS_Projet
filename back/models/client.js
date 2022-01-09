@@ -23,6 +23,9 @@ const clientSchema = new mongoose.Schema({
   pseudo:{
     type: String
   },
+  token:{
+    type: String
+  },
   adresse:{
     rue:{
       type: String,
