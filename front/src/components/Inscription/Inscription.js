@@ -6,14 +6,20 @@ export default class Inscription extends React.Component{
     super(props);
     this.registrer = this.registrer.bind(this);
   }
-  async registrer()
-  { const items = {
+  async registrer(){ 
+    const items = {
     nom : document.getElementById("nom").value,
     prenom : document.getElementById("prenom").value,
-    adresse : document.getElementById("adresse").value,
-    adresse_mail : document.getElementById("email").value,
-    code_postal :document.getElementById("code_Postale").value
+    motdepasse : document.getElementById("password").value,
+    date_de_naissance : "1996-12-31T00:00:00.000Z",
+    email : document.getElementById("email").value,
+    adresse :{
+      rue : document.getElementById("adresse").value,
+      ville : "Evry",
+      codePostal : document.getElementById("code_Postale").value
   }
+  }
+  console.log(items);
   let result = await fetch('http://localhost:4000/clients',{
   method : 'POST',
   body:JSON.stringify(items),
@@ -147,6 +153,7 @@ export default class Inscription extends React.Component{
               </button>
             </div>
           </form>
+          <button onClick={this.registrer}>test</button>
         </div>
       </div>
     </>
