@@ -1,6 +1,40 @@
+import React from "react"
 import image from "../../assets/img/logo.png"
+const API_URL ="http://localhost:4000";
+let browserHistory
+try {
+  browserHistory = require('react-router').browserHistory
+} catch (e) {}
+export default class Connexion extends React.Component {
+constructor(props){
+  super(props);
+  this.handleConnexion = this.handleConnexion.bind(this);
+}
+  loginUser({ email, motdepasse }) {
+    console.log("en cours");
+    return function() {
+        fetch.post(`${API_URL}/clients/connexion/`, { email, motdepasse })
+            .then((response) => {
+                    localStorage.setItem("token", JSON.stringify(response.token))    
+                        browserHistory.Push("/home");
+                } 
+            )
+            .catch(() => {
+               console.log('Incorrect Login Info');
+            });
+    }
+}
+async handleConnexion(){
+  console.log("connexion");
+ const person = { 
+   email : document.getElementById("email").value,
+   motdepasse : document.getElementById("password").value,
+  }
+  await this.loginUser(person.email,person.motdepasse);
 
-export default function Connexion() {
+} 
+
+  render(){
   return (
     <>
 
@@ -20,15 +54,14 @@ export default function Connexion() {
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" defaultValue="true" />
+          <form className="mt-8 space-y-6">
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email-address" className="sr-only">
                   Addresse Mail
                 </label>
                 <input
-                  id="email-address"
+                  id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -75,7 +108,7 @@ export default function Connexion() {
 
             <div>
               <button
-                type="submit"
+              onClick={this.handleConnexion}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -85,8 +118,10 @@ export default function Connexion() {
               </button>
             </div>
           </form>
+          <button onClick={this.handleConnexion}>test</button>
         </div>
       </div>
     </>
   )
+}
 }
