@@ -35,6 +35,7 @@ const prestataire = require("../models/prestataire");
  *        - nom
  *        - prenom
  *        - email 
+ *        - token
  *        - adresse
  *        - service
  *       properties:
@@ -50,6 +51,9 @@ const prestataire = require("../models/prestataire");
  *         motdepasse:
  *           type: string
  *           description: Mot de passe d'un prestataire  
+ *         token:
+ *           type: string
+ *           description: token d'un prestataire  
  *         adresse:
  *           type: object
  *           description: Adresse du prestataire
@@ -335,8 +339,21 @@ router.post('/connexion', async(req, res) => {
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(presta);
     console.log(accessToken);
-    res.status(201).send(accessToken);
-  
+    res.status(200).send(accessToken);
+    a = email
+    // const services = await (modelservices.find({email: a}));
+        // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);
+        try{
+            await modelPrestataires.updateOne(
+                {email: a},
+                {$set: {token: accessToken }}
+            );
+            res.send();
+        }catch(err){
+            res.send(err)
+        }
+    //    res.status(201).send(accessToken);
+    
     }catch (err){
       res.send(err)    
     }

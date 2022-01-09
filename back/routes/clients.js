@@ -31,6 +31,7 @@ const jwt = require('jsonwebtoken');
  *       required:
  *        - nom
  *        - prenom
+ *        - token
  *        - motdepasse
  *        - adresse
  *        - email
@@ -54,6 +55,9 @@ const jwt = require('jsonwebtoken');
  *         email:
  *           type: string
  *           description: Adresse mail du client
+ *         Token:
+ *           type: string
+ *           description: Token du client
  *         date_de_naissance:
  *           type: date
  *           decritpion: Date de naissance du client
@@ -317,7 +321,20 @@ router.post('/connexion', async(req, res) => {
     const accessToken = genereAccessToken(clientcourant);
     console.log(accessToken);
     res.status(201).send(accessToken);
-  
+    a = email
+    // const services = await (modelservices.find({email: a}));
+        // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);
+        try{
+            await modelclients.updateOne(
+                {email: a},
+                {$set: {token: accessToken }}
+            );
+            res.send();
+        }catch(err){
+            res.send(err)
+        }
+    //    res.status(201).send(accessToken);
+    
     }catch (err){
       res.send(err)    
     }
