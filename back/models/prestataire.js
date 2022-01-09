@@ -17,6 +17,10 @@ const prestatairesSchema = new mongoose.Schema({
     type:String,
     require:true
   },
+  token:{
+    type:String,
+    require:true
+  },
   adresse:{
     rue:{
       type: String,
