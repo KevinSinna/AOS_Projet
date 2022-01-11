@@ -10,27 +10,35 @@ constructor(props){
   super(props);
   this.handleConnexion = this.handleConnexion.bind(this);
 }
-  loginUser({ email, motdepasse }) {
+  async loginUser( email, motdepasse , props) {
+    const items = {email : "julius@gmail.com" ,motdepasse: "juliuspassword"};
     console.log("en cours");
-    return function() {
-        fetch.post(`${API_URL}/clients/connexion/`, { email, motdepasse })
-            .then((response) => {
-                    localStorage.setItem("token", JSON.stringify(response.token))    
-                        browserHistory.Push("/home");
+    const response = await fetch(`${API_URL}/clients/connexion`,{
+          method : 'POST',
+          body:JSON.stringify(items),
+          headers:{
+            "Content-Type":"application/json",
+            "Accept":"application/json"
+          }})
+          const data = await response.json();
+          try {
+              console.log(data)
+                    localStorage.setItem("token", data.AccesToken)    
+                        this.props.browserHistory.Push("/home");
                 } 
-            )
-            .catch(() => {
+            
+            catch {
                console.log('Incorrect Login Info');
-            });
-    }
+            };
+    
 }
-async handleConnexion(){
+async handleConnexion(props){
   console.log("connexion");
  const person = { 
    email : document.getElementById("email").value,
    motdepasse : document.getElementById("password").value,
   }
-  await this.loginUser(person.email,person.motdepasse);
+  await this.loginUser(person.email,person.motdepasse, props);
 
 } 
 
@@ -44,7 +52,7 @@ async handleConnexion(){
             <img
               className="mx-auto h-40 w-30 "
               src = {image} 
-              alt="logo"
+              alt="logo"     
             />
             <h2 className="mt-1 text-center text-3xl font-extrabold text-white">Connectez-vous à votre compte</h2>
             <p className="mt-2 text-center text-sm text-white">
@@ -54,12 +62,9 @@ async handleConnexion(){
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={this.handleConnexion}>
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Addresse Mail
-                </label>
                 <input
                   id="email"
                   name="email"
@@ -108,6 +113,7 @@ async handleConnexion(){
 
             <div>
               <button
+              type ="submit"
               onClick={this.handleConnexion}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
@@ -120,6 +126,8 @@ async handleConnexion(){
           </form>
           <button onClick={this.handleConnexion}>test</button>
         </div>
+        <div><form className="flex items-center"><input type='text'id='test'placeholder="test"></input>
+        <button type ="submit" onClick={this.handleConnexion}>Valide</button></form></div>
       </div>
     </>
   )
