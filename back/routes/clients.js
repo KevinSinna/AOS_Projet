@@ -26,6 +26,7 @@ const jwt = require('jsonwebtoken');
  *       example:
  *         email: julius@gmail.com
  *         motdepasse : juliuspassword  
+ * 
  *     Clients:
  *       type: object
  *       required:
@@ -46,21 +47,30 @@ const jwt = require('jsonwebtoken');
  *         prenom:
  *           type: string
  *           description: Prenom du client
+ *         date_de_naissance:
+ *           type: date
+ *           description: Date de naissance du client
  *         motdepasse:
  *           type: string
  *           description: Mot de passe du client
  *         adresse:
  *           type: object
- *           description: Prenom du client
+ *           properties:
+ *            rue: 
+ *              type: string
+ *              description: rue du client
+ *            ville: 
+ *              type: string
+ *              description: ville du client
+ *            codePostal: 
+ *              type: string
+ *              description: code postal du client
  *         email:
  *           type: string
  *           description: Adresse mail du client
  *         Token:
  *           type: string
  *           description: Token du client
- *         date_de_naissance:
- *           type: date
- *           decritpion: Date de naissance du client
  *       example:
  *         id: 78212321025
  *         nom: Amadeus
@@ -230,9 +240,10 @@ router.put("/:id",async (req, res) => {
                 adresse: req.body.adresse,
                 pseudo: req.body.pseudo,
                 adresse: req.body.adresse,
-                complement_adresse: req.body.complement_adresse,
                 email: req.body.email,
-                date_de_naissance: req.body.date_de_naissance
+                motdepasse: req.body.motdepasse,
+                date_de_naissance: req.body.date_de_naissance,
+                token: req.body.token
             }}
           );
           res.send();
