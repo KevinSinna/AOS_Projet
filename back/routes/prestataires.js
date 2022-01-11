@@ -113,7 +113,7 @@ const prestataire = require("../models/prestataire");
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find().select(['nom','prenom','adresse','service']);
+        const prestataires = await modelPrestataires.find();
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
@@ -216,11 +216,15 @@ router.get('/Recherche/:Prestataires', async (req, res) =>{
 
 //créer un prestataire
 router.post("/", async (req, res) => {
+    //HashPassword
+const salt = await bcrypt.genSalt(10);
+const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+
     const prestataire = new modelPrestataires({
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email,
-        motdepasse: req.body.motdepasse,
+        motdepasse: motdepassehash,
         adresse: req.body.adresse,
         service: req.body.service
     })
@@ -245,6 +249,12 @@ router.post("/", async (req, res) => {
  *           type: string
  *         required: true
  *         description: Prestataire correspondant à l'id
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Prestataires'
  *     responses:
  *       200:
  *         description: Information sur le prestataire avec l'id renseigné 
@@ -258,6 +268,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
+
+
     try{
         await modelPrestataires.updateOne(
             {_id: req.params.id},
@@ -345,8 +357,9 @@ router.post('/connexion', async(req, res) => {
             console.log("EMAIL PAS BON");
             return res.status(401).send('email invalide');
         }
-
-       if(req.body.motdepasse != presta.motdepasse){
+        const mdpvalide = await bcrypt.compare(req.body.motdepasse,presta.motdepasse)
+       if(!mdpvalide){
+           
         return res.status(401).send("Informations invalide");
        }
     //Generation du token si tout va bien
