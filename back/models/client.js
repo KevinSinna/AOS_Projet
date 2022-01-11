@@ -20,8 +20,9 @@ const clientSchema = new mongoose.Schema({
   date_de_naissance:{
     type: Date
   },
-  pseudo:{
-    type: String
+  telephone:{
+    type: String,
+    require:true
   },
   token:{
     type: String
