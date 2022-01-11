@@ -1,10 +1,11 @@
 import React from "react";
 import NavBar from '../components/NavBar/Navbar2'
 import Cards from '../components/Cards/Cards'
+import Foooter from '../components/FooterHome/Footer'
 function App() {
   const descr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.";
   return (
-    <div className="min-h-screen bg-pack-train bg-cover bg-center flex flex-col bg-fixed text-white">
+    <div className="min-h-screen bg-white bg-cover bg-center flex flex-col bg-fixed text-dark">
     <NavBar></NavBar>
           <div className="text-center  font-sans tracking-wide align-middle mt-20">
               <p> 
@@ -16,7 +17,7 @@ function App() {
           </div>
 
       <div>
-                  <nav className="flex items-center justify-between flex-wrap bg-pink-300 bg-opacity-10  p-6 shadow-md rounded-lg mr-20 ml-20 mt-20">
+                  <nav className="flex items-center justify-between flex-wrap bg-blue-700  p-6 shadow-md rounded-lg mr-20 ml-20 mt-20">
                   {/* Logo navbar */}      
                       <div class="flex items-center flex-shrink-0 text-white mr-6">
                           <span class="font-semibold text-xl tracking-tight ml-4">Que recherchez-vous ?</span>
@@ -39,7 +40,7 @@ function App() {
             <div class="flex-1 "><Cards nom = "Hamidi" prenom = "Badr" description ={descr}></Cards></div>
             <div class="flex-1 "><Cards nom = "Bensaid" prenom = "Ahmed" description ={descr}></Cards></div>
         </div>
-      
+      <Foooter/>
       </div>
   );}
   export default App;
