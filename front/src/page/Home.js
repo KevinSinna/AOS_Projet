@@ -2,11 +2,13 @@ import React from "react";
 import NavBar from '../components/NavBar/Navbar2'
 import Cards from '../components/Cards/Cards'
 import Foooter from '../components/FooterHome/Footer'
+import Popupp from '../components/Popup/popup'
 function App() {
   const descr = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.";
   return (
     <div className="min-h-screen bg-white bg-cover bg-center flex flex-col bg-fixed text-dark">
     <NavBar></NavBar>
+    <Popupp></Popupp>
           <div className="text-center  font-sans tracking-wide align-middle mt-20">
               <p> 
                   <h1 className="text-5xl">On vous aide !</h1>

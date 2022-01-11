@@ -15,6 +15,7 @@ import Mesreservation from './components/Profil/Mes Reservations';
 import moncompte from './page/MonCompte/Moncompte'
 import InfoClient from './components/Profil/InfoClient';
 import Agenda from './page/MonCompte/Agenda';
+import rdv from './page/FormulaireRDV';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
       <Route path= "/reservation" exact component={reservation}/>
       <Route path= "/moncompte" exact component={moncompte}/>
       <Route path= "/agenda" exact component={Agenda}/>
+      <Route path= "/rdv" exact component={rdv}/>
+      
     </Switch>
   </BrowserRouter>
   )}
