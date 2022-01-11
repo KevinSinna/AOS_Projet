@@ -51,7 +51,16 @@ const jwt = require('jsonwebtoken');
  *           description: Mot de passe du client
  *         adresse:
  *           type: object
- *           description: Prenom du client
+ *           properties:
+ *             rue:
+ *                type: string
+ *                description: Rue du client
+ *             code postale:
+ *                type: string
+ *                description: code postale du client
+ *             ville:
+ *                type: string
+ *                description: ville du client
  *         telephone:
  *           type: string
  *           description: telephone du client

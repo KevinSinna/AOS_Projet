@@ -28,7 +28,7 @@ const prestataire = require("../models/prestataire");
  *           description: mot de passe d'un prestataire
  *       example:
  *         email: jules.laporte@gmail.com
- *         motdepasse : Mypassword       
+ *         motdepasse : Mypassword 
  *     Prestataires:
  *       type: object
  *       required:
@@ -38,6 +38,7 @@ const prestataire = require("../models/prestataire");
  *        - token
  *        - adresse
  *        - service
+ *        - telephone
  *       properties:
  *         nom:
  *           type: string
@@ -56,10 +57,22 @@ const prestataire = require("../models/prestataire");
  *           description: token d'un prestataire  
  *         adresse:
  *           type: object
- *           description: Adresse du prestataire
+ *           properties:
+ *             rue:
+ *                type: string
+ *                description: Rue du client
+ *             code postale:
+ *                type: string
+ *                description: code postale du client
+ *             ville:
+ *                type: string
+ *                description: ville du client
  *         service:
  *           type: [string]
  *           description: Liste des services proposé par le prestataire 
+ *         telephone:
+ *           type: string
+ *           description: telephone d'un prestataire  
  *       example:
  *         id: 4524824653
  *         nom: LaPorte
@@ -140,6 +153,43 @@ router.get('/:id', async (req, res) =>{
         res.send(err)
     }
 })
+
+/**
+ * @swagger
+ * /Prestataires/Recherche/{Prestataires}:
+ *   get:
+ *     summary: Retourne le service en fonction de l'id
+ *     tags: [Prestataires]
+ *     parameters:
+ *       - in: path
+ *         name: service
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: prestation correspondant à l'id
+ *     responses:
+ *       200:
+ *         description: Information sur le prestation avec l'id renseigné 
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Prestataires'
+ *       404:
+ *         description: prestations non existant
+ */
+
+//Selectionner un seul prestation
+router.get('/Recherche/:Prestataires', async (req, res) =>{
+    try {
+      
+      const prestataire = await modelservices.find({service: req.params.service})
+      //   const service = await modelservices.findById(req.params.id);
+        res.status(200).json(prestataire)
+    } catch (err) {
+        res.send(err)
+    }
+  })
+
 
 /**
  * @swagger
