@@ -27,7 +27,7 @@ const modelprestations = require('../models/prestation')
  *           type: ObjectId
  *           description: Id d'un prestataire
  *         service:
- *           type: [string]
+ *           type: string
  *           description: service rendue
  *         date:
  *           type: Date

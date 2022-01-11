@@ -20,9 +20,9 @@ const modelservices = require('../models/service')
  *           description: Numéro d'identifiant service auto généré 
  *         PrestatairesID:
  *           type: ObjectId
- *           Description: Id d'un prestataire
+ *           description: Id d'un prestataire
  *         Service:
- *           type: [string]
+ *           type: string
  *           description: service rendue
  *         DateDebut:
  *           type: Date
