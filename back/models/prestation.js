@@ -10,7 +10,7 @@ const prestationSchema = new mongoose.Schema({
     require:true
   },
   service:{
-    type:[String],
+    type:String,
     require:true
   },
   date:{

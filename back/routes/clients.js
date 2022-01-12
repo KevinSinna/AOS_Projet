@@ -3,19 +3,41 @@ const { ClientSession } = require("mongodb");
 // const clients = require("../models/clients");
 const router = express.Router()
 const modelclients = require('../models/client')
+const bcrypt = require("bcrypt");
+// Token de connexion
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const { find, findOne } = require("../models/client");
 
 /**
  * @swagger
  * components:
  *   schemas:
+ *     Connexion:
+ *       type: object
+ *       required:
+ *        - email
+ *        - motdepasse 
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: email d'un client
+ *         motdepasse:
+ *           type: string
+ *           description: mot de passe d'un client
+ *       example:
+ *         email: julius@gmail.com
+ *         motdepasse : juliuspassword  
  *     Clients:
  *       type: object
  *       required:
  *        - nom
  *        - prenom
+ *        - telephone
+ *        - motdepasse
  *        - adresse
- *        - code_postal
- *        - adresse_mail
+ *        - email
+ *        - date_de_naissance
  *       properties:
  *         id:
  *           type: number
@@ -26,22 +48,45 @@ const modelclients = require('../models/client')
  *         prenom:
  *           type: string
  *           description: Prenom du client
- *         adresse:
+ *         motdepasse:
  *           type: string
- *           description: Prenom du client
- *         code_postal:
- *           type: number
- *           description: Code postale du client
- *         adresse_mail:
+ *           description: Mot de passe du client
+ *         adresse:
+ *           type: object
+ *           properties:
+ *             rue:
+ *                type: string
+ *                description: Rue du client
+ *             code postale:
+ *                type: string
+ *                description: code postale du client
+ *             ville:
+ *                type: string
+ *                description: ville du client
+ *         telephone:
+ *           type: string
+ *           description: telephone du client
+ *         email:
  *           type: string
  *           description: Adresse mail du client
+ *         Token:
+ *           type: string
+ *           description: Token du client
+ *         date_de_naissance:
+ *           type: date
+ *           description: Date de naissance du client
  *       example:
  *         id: 78212321025
  *         nom: Amadeus
  *         prenom: Julius
- *         adresse_mail: julius@gmail.com
- *         adresse: 14 rue de la gare
- *         code_postal: 91100
+ *         telephone : 012323241
+ *         motdepasse: juliuspassword
+ *         date_de_naissance: 1997-10-10
+ *         email: julius@gmail.com
+ *         adresse: 
+ *          rue: 93 bis rue de la metropole
+ *          ville: Buisance
+ *          codePostal: 75010
  */
 
 /**
@@ -138,14 +183,24 @@ router.get('/:id', async (req, res) =>{
 
 //créer un client
 router.post("/", async (req, res) => {
+
+//Verifie l'email
+const emailexiste = await modelclients.findOne({email : req.body.email});
+if(emailexiste) return res.status(400).send('Email existant');
+
+//HashPassword
+const salt = await bcrypt.genSalt(10);
+const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    
+
     const client = new modelclients({
         nom: req.body.nom ,
         prenom: req.body.prenom ,
-        code_postal: req.body.code_postal,
-        pseudo: req.body.pseudo,
         adresse: req.body.adresse,
-        complement_adresse: req.body.complement_adresse,
-        adresse_mail: req.body.adresse_mail,
+        motdepasse: motdepassehash,
+        telephone: req.body.telephone,
+        adresse: req.body.adresse,
+        email: req.body.email,
         date_de_naissance: req.body.date_de_naissance
     })
     try{
@@ -191,25 +246,47 @@ router.post("/", async (req, res) => {
 
 router.put("/:id",async (req, res) => {
   //Mise a jour des informations
-      try{
-           await modelclients.updateOne(
-              {_id: req.params.id},
-              {$set: {
-                nom: req.body.nom ,
-                prenom: req.body.prenom ,
-                code_postal: req.body.code_postal,
-                pseudo: req.body.pseudo,
-                adresse: req.body.adresse,
-                complement_adresse: req.body.complement_adresse,
-                adresse_mail: req.body.adresse_mail,
-                date_de_naissance: req.body.date_de_naissance
-            }}
-          );
-          res.send();
-      }catch(err){
-          res.send(err)
-      }
-  })
+  console.log(req.body.motdepasse);
+if(req.body.motdepasse != undefined){
+    console.log("je rentre");
+    console.log(req.body.motdepasse);
+    const salt = await bcrypt.genSalt(10);
+    const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    try{
+        await modelclients.updateOne(
+            {_id: req.params.id},
+            {$set: {nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              adresse: req.body.adresse,
+              motdepasse: motdepassehash,
+              email: req.body.email,
+              date_de_naissance: req.body.date_de_naissance,
+              telephone: req.body.telephone}}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}else{
+
+    try{
+        await modelclients.updateOne(
+            {_id: req.params.id},
+            {$set: {
+              nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              adresse: req.body.adresse,
+              email: req.body.email,
+              telephone: req.body.telephone,
+              date_de_naissance: req.body.date_de_naissance
+          }}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}
+})
 /**
  * @swagger
  * /clients/{id}:
@@ -242,5 +319,73 @@ try{
 }
 })
 
+
+
+//generation du token
+function genereAccessToken(clientcourant){
+    return jwt.sign(clientcourant,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'1800s'});
+  }
+
+/**
+ * @swagger
+ * /clients/connexion:
+ *   post:
+ *     summary: Authentification
+ *     tags: [Clients]
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Connexion'
+ *     responses:
+ *       201:
+ *         description: Client connecté avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Connexion'
+ *       401:
+ *          description: Information incorrecte 
+ */
+
+router.post('/connexion', async(req, res) => {
+    try{
+      // si Email existe dans le mot de passe et que le mot de passe ecrit correspond alors on donne le token d'accés 
+    const { email, motdepasse } = req.body
+    const clientcourant = await modelclients.findOne({ email }).lean()
+        if (!clientcourant) {
+            console.log("EMAIL PAS BON");
+            return res.status(401).send('email invalide');
+        }
+        const mdpvalide = await bcrypt.compare(req.body.motdepasse,clientcourant.motdepasse)
+        if(!mdpvalide){
+           
+            return res.status(401).send("Informations invalide");
+           }
+    //Generation du token si tout va bien
+    const accessToken = genereAccessToken(clientcourant);
+    console.log(accessToken);
+    res.status(201).send(accessToken);
+    a = email
+    // const services = await (modelservices.find({email: a}));
+        // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);
+        try{
+            await modelclients.updateOne(
+                {email: a},
+                {$set: {token: accessToken }}
+            );
+            res.send();
+        }catch(err){
+            res.send(err)
+        }
+    //    res.status(201).send(accessToken);
+    
+    }catch (err){
+      res.send(err)    
+    }
+  });
 
 module.exports = router;
