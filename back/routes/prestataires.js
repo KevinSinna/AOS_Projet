@@ -1,5 +1,4 @@
 const express = require("express");
-// const prestataires = require("../models/prestataire");
 const router = express.Router()
 const modelPrestataires = require('../models/prestataire')
 //Crypte mdp
@@ -408,8 +407,8 @@ router.post('/connexion', async(req, res) => {
        }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(presta);
-    res.header('auth-token',accessToken).send(accessToken);
     res.status(200).send(accessToken);
+    
     a = email
     // const services = await (modelservices.find({email: a}));
         // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);
@@ -418,12 +417,11 @@ router.post('/connexion', async(req, res) => {
                 {email: a},
                 {$set: {token: accessToken }}
             );
-            res.send();
         }catch(err){
             res.send(err)
         }
-    //    res.status(201).send(accessToken);
-    
+        //res.header('auth-token',accessToken).send(accessToken);
+
     }catch (err){
       res.send(err)    
     }

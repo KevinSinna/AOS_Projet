@@ -6,6 +6,7 @@ const modelclients = require('../models/client')
 // Token de connexion
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const { find, findOne } = require("../models/client");
 
 /**
  * @swagger
@@ -181,11 +182,21 @@ router.get('/:id', async (req, res) =>{
 
 //créer un client
 router.post("/", async (req, res) => {
+
+//Verifie l'email
+const emailexiste = await modelclients.findOne({email : req.body.email});
+if(emailexiste) return res.status(400).send('Email existant');
+
+//HashPassword
+const salt = await bcrypt.genSalt(10);
+const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    
+
     const client = new modelclients({
         nom: req.body.nom ,
         prenom: req.body.prenom ,
         adresse: req.body.adresse,
-        motdepasse: req.body.motdepasse,
+        motdepasse: motdepassehash,
         telephone: req.body.telephone,
         adresse: req.body.adresse,
         email: req.body.email,
@@ -234,25 +245,50 @@ router.post("/", async (req, res) => {
 
 router.put("/:id",async (req, res) => {
   //Mise a jour des informations
-      try{
-           await modelclients.updateOne(
-              {_id: req.params.id},
-              {$set: {
-                nom: req.body.nom ,
-                prenom: req.body.prenom ,
-                adresse: req.body.adresse,
-                pseudo: req.body.pseudo,
-                adresse: req.body.adresse,
-                complement_adresse: req.body.complement_adresse,
-                email: req.body.email,
-                date_de_naissance: req.body.date_de_naissance
-            }}
-          );
-          res.send();
-      }catch(err){
-          res.send(err)
-      }
-  })
+  console.log(req.body.motdepasse);
+if(req.body.motdepasse != undefined){
+    const salt = await bcrypt.genSalt(10);
+    const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    try{
+        await modelclients.updateOne(
+            {_id: req.params.id},
+            {$set: {
+              nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              adresse: req.body.adresse,
+              motdepasse: motdepassehash,
+              pseudo: req.body.pseudo,
+              adresse: req.body.adresse,
+              complement_adresse: req.body.complement_adresse,
+              email: req.body.email,
+              date_de_naissance: req.body.date_de_naissance
+          }}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}else{
+    try{
+        await modelclients.updateOne(
+            {_id: req.params.id},
+            {$set: {
+              nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              adresse: req.body.adresse,
+              pseudo: req.body.pseudo,
+              adresse: req.body.adresse,
+              complement_adresse: req.body.complement_adresse,
+              email: req.body.email,
+              date_de_naissance: req.body.date_de_naissance
+          }}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}
+})
 /**
  * @swagger
  * /clients/{id}:
