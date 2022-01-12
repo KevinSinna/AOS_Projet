@@ -49,6 +49,7 @@ const prestataire = require("../models/prestataire");
  *        - token
  *        - adresse
  *        - service
+ *        - motdepasse 
  *        - telephone
  *       properties:
  *         nom:
@@ -286,7 +287,6 @@ const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
 
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
-
 console.log(req.body.motdepasse);
 if(req.body.motdepasse != undefined){
     console.log("je rentre")
@@ -320,11 +320,7 @@ if(req.body.motdepasse != undefined){
     }catch(err){
         res.send(err)
     }
-}
-
-
-
-   
+}  
 })
 
 /**

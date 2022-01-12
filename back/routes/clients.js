@@ -3,6 +3,7 @@ const { ClientSession } = require("mongodb");
 // const clients = require("../models/clients");
 const router = express.Router()
 const modelclients = require('../models/client')
+const bcrypt = require("bcrypt");
 // Token de connexion
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
@@ -73,7 +74,7 @@ const { find, findOne } = require("../models/client");
  *           description: Token du client
  *         date_de_naissance:
  *           type: date
- *           decritpion: Date de naissance du client
+ *           description: Date de naissance du client
  *       example:
  *         id: 78212321025
  *         nom: Amadeus
@@ -247,28 +248,27 @@ router.put("/:id",async (req, res) => {
   //Mise a jour des informations
   console.log(req.body.motdepasse);
 if(req.body.motdepasse != undefined){
+    console.log("je rentre");
+    console.log(req.body.motdepasse);
     const salt = await bcrypt.genSalt(10);
     const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
     try{
         await modelclients.updateOne(
             {_id: req.params.id},
-            {$set: {
-              nom: req.body.nom ,
+            {$set: {nom: req.body.nom ,
               prenom: req.body.prenom ,
               adresse: req.body.adresse,
               motdepasse: motdepassehash,
-              pseudo: req.body.pseudo,
-              adresse: req.body.adresse,
-              complement_adresse: req.body.complement_adresse,
               email: req.body.email,
-              date_de_naissance: req.body.date_de_naissance
-          }}
+              date_de_naissance: req.body.date_de_naissance,
+              telephone: req.body.telephone}}
         );
         res.send();
     }catch(err){
         res.send(err)
     }
 }else{
+
     try{
         await modelclients.updateOne(
             {_id: req.params.id},
@@ -276,10 +276,8 @@ if(req.body.motdepasse != undefined){
               nom: req.body.nom ,
               prenom: req.body.prenom ,
               adresse: req.body.adresse,
-              pseudo: req.body.pseudo,
-              adresse: req.body.adresse,
-              complement_adresse: req.body.complement_adresse,
               email: req.body.email,
+              telephone: req.body.telephone,
               date_de_naissance: req.body.date_de_naissance
           }}
         );
@@ -362,10 +360,11 @@ router.post('/connexion', async(req, res) => {
             console.log("EMAIL PAS BON");
             return res.status(401).send('email invalide');
         }
-
-       if(req.body.motdepasse != clientcourant.motdepasse){
-        return res.status(401).send("Informations invalide");
-       }
+        const mdpvalide = await bcrypt.compare(req.body.motdepasse,clientcourant.motdepasse)
+        if(!mdpvalide){
+           
+            return res.status(401).send("Informations invalide");
+           }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(clientcourant);
     console.log(accessToken);

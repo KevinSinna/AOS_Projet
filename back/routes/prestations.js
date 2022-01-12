@@ -11,7 +11,7 @@ const modelprestations = require('../models/prestation')
  *       type: object
  *       required:
  *        - ClientID
- *        - prestationsID
+ *        - PrestationsID
  *        - service
  *        - date
  *        - adresse
@@ -48,7 +48,7 @@ const modelprestations = require('../models/prestation')
  * @swagger
  * tags:
  *  name: Prestations
- *  description: Route API prestations -Port 7500 
+ *  description: Route API prestations -Port 7500 qui fait le lien entre client et prestataires
  */
 
 /**

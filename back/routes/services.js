@@ -9,7 +9,7 @@ const modelservices = require('../models/service')
  *     Services:
  *       type: object
  *       required:
- *        - PrestataireID
+ *        - PrestatairesID
  *        - Service
  *        - DateDebut
  *        - DateFin
