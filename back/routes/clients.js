@@ -183,7 +183,11 @@ router.post("/", async (req, res) => {
         prenom: req.body.prenom ,
         adresse: req.body.adresse,
         motdepasse: req.body.motdepasse,
+<<<<<<< HEAD
         pseudo: req.body.pseudo,
+=======
+        telephone: req.body.telephone,
+>>>>>>> parent of 15491453 (A merge sur le main)
         adresse: req.body.adresse,
         email: req.body.email,
         date_de_naissance: req.body.date_de_naissance
@@ -240,10 +244,16 @@ router.put("/:id",async (req, res) => {
                 adresse: req.body.adresse,
                 pseudo: req.body.pseudo,
                 adresse: req.body.adresse,
+<<<<<<< HEAD
                 email: req.body.email,
                 motdepasse: req.body.motdepasse,
                 date_de_naissance: req.body.date_de_naissance,
                 token: req.body.token
+=======
+                complement_adresse: req.body.complement_adresse,
+                email: req.body.email,
+                date_de_naissance: req.body.date_de_naissance
+>>>>>>> parent of 15491453 (A merge sur le main)
             }}
           );
           res.send();

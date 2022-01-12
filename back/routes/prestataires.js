@@ -338,7 +338,11 @@ router.post('/connexion', async(req, res) => {
        }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(presta);
+<<<<<<< HEAD
     console.log(accessToken);
+=======
+    res.header('auth-token',accessToken).send(accessToken);
+>>>>>>> parent of 15491453 (A merge sur le main)
     res.status(200).send(accessToken);
     a = email
     // const services = await (modelservices.find({email: a}));
