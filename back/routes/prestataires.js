@@ -9,11 +9,18 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { find, findOne } = require("../models/prestataire");
 const prestataire = require("../models/prestataire");
-const verifieToken = require("./veirifieT");
 
-router.get('/token', async (req,res)=>{
-    verifieToken();
-})
+/**router.get('/token', async (req,res)=>{
+    const token = req.header('auth-token');
+    if(!token) return res.status(401).send('Accès refusé');
+    try{
+      const verified = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+      res.prestataires = verified;
+      next();
+    }catch (err){
+      res.status(400).send('Token invalide');
+});
+*/
 
 /**
  * @swagger
