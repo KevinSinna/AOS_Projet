@@ -9,7 +9,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { find, findOne } = require("../models/prestataire");
 const prestataire = require("../models/prestataire");
-const verifieToken = require("./veirifieT");
+const verifieToken = require("../verifieToken");
 
 router.get('/token', async (req,res)=>{
     verifieToken();
