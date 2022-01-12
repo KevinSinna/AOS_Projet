@@ -1,27 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React from "react"
 import image from "../../assets/img/persotest.png"
-/*const people = [
-  {
-    name: 'Badr Cooper',
-    title: 'Technicien',
-    department: 'Villepinte',
-    role: 'Admin',
-    email: 'test@example.com',
-    image:
-    '../../assets/img/persotest.png',
-  },
-  {
-    name: 'Badr Cooper',
-    title: 'Technicien',
-    department: 'Villepinte',
-    role: 'Admin',
-    email: 'test@example.com',
-    image:
-    '../../assets/img/persotest.png',
-  },
-  // More people...
-]*/
+import Prestationencours from "../Profil/Prestationencours";
+import Ticket from "./Ticket";
 const ServiceAPI = 'http://localhost:7000/Services';
 const PrestataireAPI = 'http://localhost:5000/prestataires/';
 const SearchAPI = 'http://localhost:7000/Services/recherche/';
@@ -34,9 +15,13 @@ export default class List extends React.Component {
       search : false
     }
     this.search = this.search.bind(this);
+    this.init = this.init.bind(this);
   }
- 
   async componentDidMount() {
+    this.init();
+  }
+  async init() {
+    this.setState({ people:[]});
       // GET request using fetch with async/await
       const response = await fetch(ServiceAPI);
       const data = await response.json();
@@ -48,24 +33,29 @@ export default class List extends React.Component {
           return Promise.reject(error);
       }
          const prestataire = await response.json();
+         console.log(service);
          return ({name: prestataire.nom + ' '+ prestataire.prenom,
          title: service.Service,
          department: prestataire.adresse.ville,
          role: 'Préstataire',
          email: prestataire.email,
          image:
-         '../../assets/img/persotest.png'
+         '../../assets/img/persotest.png',
+         Description : service.Description
          })
        })
+       console.log(datap);
        datap.map((dat)=>{
         dat.then(value => { this.setState({ people: [...this.state.people , value] })});
        })
   }
    
 async search(){
-  this.setState({people:[]});
+
  // GET request using fetch with async/await
  const profession =  document.getElementById("search").value;
+ if(profession !=""){
+ this.setState({people:[]});
  const response = await fetch(SearchAPI + profession);
  const data = await response.json();
 const datap = await data.map(async (service) => {
@@ -82,13 +72,18 @@ const datap = await data.map(async (service) => {
     role: 'Préstataire',
     email: prestataire.email,
     image:
-    '../../assets/img/persotest.png'
+    '../../assets/img/persotest.png',
+    description : service.Description
     })
   })
+
  console.warn(datap);
  datap.map((dat)=>{
   dat.then(value => { this.setState({ people: [...this.state.people , value] })});
  })
+}else{
+  this.init();
+}
 }
 
   componentWillUnmount() {  }
@@ -154,34 +149,7 @@ const datap = await data.map(async (service) => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {this.state.people.map((person) => (
-                  <tr key={person.email}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{person.name}</div>
-                          <div className="text-sm text-gray-500">{person.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.title}</div>
-                      <div className="text-sm text-gray-500">{person.department}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.role}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Prenez RDV
-                      </a>
-                    </td>
-                  </tr>
+                  <Ticket description ={person.Description} email = {person.email} name ={person.name} title = {person.title} status = "Active" department = {person.department} role ={person.role} image={person.image}></Ticket>
                 ))}
               </tbody>
             </table>

@@ -1,6 +1,7 @@
 import React from "react"
 import image from "../../assets/img/logo.png"
 const API_URL ="http://localhost:4000";
+
 let browserHistory
 try {
   browserHistory = require('react-router').browserHistory
@@ -10,21 +11,30 @@ constructor(props){
   super(props);
   this.handleConnexion = this.handleConnexion.bind(this);
 }
-  loginUser({ email, motdepasse }) {
+  async loginUser( email, motdepasse) {
+    const items = {email : "julius@gmail.com" ,motdepasse: "juliuspassword"};
     console.log("en cours");
-    return function() {
-        fetch.post(`${API_URL}/clients/connexion/`, { email, motdepasse })
-            .then((response) => {
-                    localStorage.setItem("token", JSON.stringify(response.token))    
-                        browserHistory.Push("/home");
+    const response = await fetch(`${API_URL}/clients/connexion`,{
+          method : 'POST',
+          body:JSON.stringify(items),
+          headers:{
+            "Content-Type":"application/json",
+            "Accept":"application/json"
+          }})
+          const data = await response.json();
+          try {
+              console.log(data)
+                    localStorage.setItem("token", data.AccesToken)    
+                        this.props.browserHistory.Push("/home");
                 } 
-            )
-            .catch(() => {
+            
+            catch {
                console.log('Incorrect Login Info');
-            });
-    }
+            };
+    
 }
-async handleConnexion(){
+async handleConnexion(e){
+  e.preventDefault();
   console.log("connexion");
  const person = { 
    email : document.getElementById("email").value,
@@ -44,7 +54,7 @@ async handleConnexion(){
             <img
               className="mx-auto h-40 w-30 "
               src = {image} 
-              alt="logo"
+              alt="logo"     
             />
             <h2 className="mt-1 text-center text-3xl font-extrabold text-white">Connectez-vous à votre compte</h2>
             <p className="mt-2 text-center text-sm text-white">
@@ -54,15 +64,11 @@ async handleConnexion(){
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmitCapture={this.handleConnexion}>
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Addresse Mail
-                </label>
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
                   required
@@ -76,7 +82,6 @@ async handleConnexion(){
                 </label>
                 <input
                   id="password"
-                  name="password"
                   type="password"
                   autoComplete="current-password"
                   required
@@ -90,7 +95,6 @@ async handleConnexion(){
               <div className="flex items-center">
                 <input
                   id="remember-me"
-                  name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
@@ -108,7 +112,7 @@ async handleConnexion(){
 
             <div>
               <button
-              onClick={this.handleConnexion}
+              type ="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -118,7 +122,6 @@ async handleConnexion(){
               </button>
             </div>
           </form>
-          <button onClick={this.handleConnexion}>test</button>
         </div>
       </div>
     </>

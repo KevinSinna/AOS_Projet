@@ -287,7 +287,7 @@ try{
 
 //generation du token
 function genereAccessToken(clientcourant){
-    return jwt.sign(clientcourant,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'1800s'});
+    return jwt.sign(clientcourant,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'30s'});
   }
 
 /**
@@ -330,8 +330,11 @@ router.post('/connexion', async(req, res) => {
        }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(clientcourant);
+    const token = {
+        AccesToken : accessToken
+    }
     console.log(accessToken);
-    res.status(201).send(accessToken);
+    res.status(201).send(token);
     a = email
     // const services = await (modelservices.find({email: a}));
         // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);
