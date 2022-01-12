@@ -3,9 +3,11 @@ const { ClientSession } = require("mongodb");
 // const clients = require("../models/clients");
 const router = express.Router()
 const modelclients = require('../models/client')
+const bcrypt = require("bcrypt");
 // Token de connexion
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const { find, findOne } = require("../models/client");
 
 /**
  * @swagger
@@ -32,7 +34,7 @@ const jwt = require('jsonwebtoken');
  *       required:
  *        - nom
  *        - prenom
- *        - token
+ *        - telephone
  *        - motdepasse
  *        - adresse
  *        - email
@@ -56,15 +58,18 @@ const jwt = require('jsonwebtoken');
  *         adresse:
  *           type: object
  *           properties:
- *            rue: 
- *              type: string
- *              description: rue du client
- *            ville: 
- *              type: string
- *              description: ville du client
- *            codePostal: 
- *              type: string
- *              description: code postal du client
+ *             rue:
+ *                type: string
+ *                description: Rue du client
+ *             code postale:
+ *                type: string
+ *                description: code postale du client
+ *             ville:
+ *                type: string
+ *                description: ville du client
+ *         telephone:
+ *           type: string
+ *           description: telephone du client
  *         email:
  *           type: string
  *           description: Adresse mail du client
@@ -75,6 +80,7 @@ const jwt = require('jsonwebtoken');
  *         id: 78212321025
  *         nom: Amadeus
  *         prenom: Julius
+ *         telephone : 012323241
  *         motdepasse: juliuspassword
  *         date_de_naissance: 1997-10-10
  *         email: julius@gmail.com
@@ -178,16 +184,22 @@ router.get('/:id', async (req, res) =>{
 
 //créer un client
 router.post("/", async (req, res) => {
+
+//Verifie l'email
+const emailexiste = await modelclients.findOne({email : req.body.email});
+if(emailexiste) return res.status(400).send('Email existant');
+
+//HashPassword
+const salt = await bcrypt.genSalt(10);
+const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    
+
     const client = new modelclients({
         nom: req.body.nom ,
         prenom: req.body.prenom ,
         adresse: req.body.adresse,
-        motdepasse: req.body.motdepasse,
-<<<<<<< HEAD
-        pseudo: req.body.pseudo,
-=======
+        motdepasse: motdepassehash,
         telephone: req.body.telephone,
->>>>>>> parent of 15491453 (A merge sur le main)
         adresse: req.body.adresse,
         email: req.body.email,
         date_de_naissance: req.body.date_de_naissance
@@ -235,32 +247,47 @@ router.post("/", async (req, res) => {
 
 router.put("/:id",async (req, res) => {
   //Mise a jour des informations
-      try{
-           await modelclients.updateOne(
-              {_id: req.params.id},
-              {$set: {
-                nom: req.body.nom ,
-                prenom: req.body.prenom ,
-                adresse: req.body.adresse,
-                pseudo: req.body.pseudo,
-                adresse: req.body.adresse,
-<<<<<<< HEAD
-                email: req.body.email,
-                motdepasse: req.body.motdepasse,
-                date_de_naissance: req.body.date_de_naissance,
-                token: req.body.token
-=======
-                complement_adresse: req.body.complement_adresse,
-                email: req.body.email,
-                date_de_naissance: req.body.date_de_naissance
->>>>>>> parent of 15491453 (A merge sur le main)
-            }}
-          );
-          res.send();
-      }catch(err){
-          res.send(err)
-      }
-  })
+  console.log(req.body.motdepasse);
+if(req.body.motdepasse != undefined){
+    console.log("je rentre");
+    console.log(req.body.motdepasse);
+    const salt = await bcrypt.genSalt(10);
+    const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    try{
+        await modelclients.updateOne(
+            {_id: req.params.id},
+            {$set: {nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              adresse: req.body.adresse,
+              motdepasse: motdepassehash,
+              email: req.body.email,
+              date_de_naissance: req.body.date_de_naissance,
+              telephone: req.body.telephone}}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}else{
+
+    try{
+        await modelclients.updateOne(
+            {_id: req.params.id},
+            {$set: {
+              nom: req.body.nom ,
+              prenom: req.body.prenom ,
+              adresse: req.body.adresse,
+              email: req.body.email,
+              telephone: req.body.telephone,
+              date_de_naissance: req.body.date_de_naissance
+          }}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}
+})
 /**
  * @swagger
  * /clients/{id}:
@@ -297,7 +324,7 @@ try{
 
 //generation du token
 function genereAccessToken(clientcourant){
-    return jwt.sign(clientcourant,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'30s'});
+    return jwt.sign(clientcourant,process.env.ACCESS_TOKEN_SECRET, {expiresIn:'1800s'});
   }
 
 /**
@@ -334,17 +361,15 @@ router.post('/connexion', async(req, res) => {
             console.log("EMAIL PAS BON");
             return res.status(401).send('email invalide');
         }
-
-       if(req.body.motdepasse != clientcourant.motdepasse){
-        return res.status(401).send("Informations invalide");
-       }
+        const mdpvalide = await bcrypt.compare(req.body.motdepasse,clientcourant.motdepasse)
+        if(!mdpvalide){
+           
+            return res.status(401).send("Informations invalide");
+           }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(clientcourant);
-    const token = {
-        AccesToken : accessToken
-    }
     console.log(accessToken);
-    res.status(201).send(token);
+    res.status(201).send(accessToken);
     a = email
     // const services = await (modelservices.find({email: a}));
         // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);

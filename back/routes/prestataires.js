@@ -1,5 +1,4 @@
 const express = require("express");
-// const prestataires = require("../models/prestataire");
 const router = express.Router()
 const modelPrestataires = require('../models/prestataire')
 //Crypte mdp
@@ -9,6 +8,18 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { find, findOne } = require("../models/prestataire");
 const prestataire = require("../models/prestataire");
+
+/**router.get('/token', async (req,res)=>{
+    const token = req.header('auth-token');
+    if(!token) return res.status(401).send('Accès refusé');
+    try{
+      const verified = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+      res.prestataires = verified;
+      next();
+    }catch (err){
+      res.status(400).send('Token invalide');
+});
+*/
 
 /**
  * @swagger
@@ -28,7 +39,7 @@ const prestataire = require("../models/prestataire");
  *           description: mot de passe d'un prestataire
  *       example:
  *         email: jules.laporte@gmail.com
- *         motdepasse : Mypassword       
+ *         motdepasse : Mypassword 
  *     Prestataires:
  *       type: object
  *       required:
@@ -38,6 +49,8 @@ const prestataire = require("../models/prestataire");
  *        - token
  *        - adresse
  *        - service
+ *        - motdepasse 
+ *        - telephone
  *       properties:
  *         nom:
  *           type: string
@@ -56,10 +69,22 @@ const prestataire = require("../models/prestataire");
  *           description: token d'un prestataire  
  *         adresse:
  *           type: object
- *           description: Adresse du prestataire
+ *           properties:
+ *             rue:
+ *                type: string
+ *                description: Rue du client
+ *             code postale:
+ *                type: string
+ *                description: code postale du client
+ *             ville:
+ *                type: string
+ *                description: ville du client
  *         service:
  *           type: [string]
  *           description: Liste des services proposé par le prestataire 
+ *         telephone:
+ *           type: string
+ *           description: telephone d'un prestataire  
  *       example:
  *         id: 4524824653
  *         nom: LaPorte
@@ -97,10 +122,11 @@ const prestataire = require("../models/prestataire");
  *                 $ref: '#/components/schemas/Prestataires'
  */
 
+
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
     try{
-        const prestataires = await modelPrestataires.find().select(['nom','prenom','adresse','service']);
+        const prestataires = await modelPrestataires.find();
         res.status(201).json(prestataires);
     }catch (err){
         res.send(err)
@@ -203,11 +229,21 @@ router.get('/Recherche/:Prestataires', async (req, res) =>{
 
 //créer un prestataire
 router.post("/", async (req, res) => {
+
+
+//Verifie l'email
+const emailexiste = await modelPrestataires.findOne({email : req.body.email});
+if(emailexiste) return res.status(400).send('Email existant');
+
+//HashPassword
+const salt = await bcrypt.genSalt(10);
+const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+
     const prestataire = new modelPrestataires({
         nom: req.body.nom,
         prenom: req.body.prenom,
         email: req.body.email,
-        motdepasse: req.body.motdepasse,
+        motdepasse: motdepassehash,
         adresse: req.body.adresse,
         service: req.body.service
     })
@@ -232,6 +268,12 @@ router.post("/", async (req, res) => {
  *           type: string
  *         required: true
  *         description: Prestataire correspondant à l'id
+ *     requestBody:
+ *      required: true
+ *      content:
+ *       application/json:
+ *        schema:
+ *         $ref: '#/components/schemas/Prestataires'
  *     responses:
  *       200:
  *         description: Information sur le prestataire avec l'id renseigné 
@@ -245,6 +287,27 @@ router.post("/", async (req, res) => {
 
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
+console.log(req.body.motdepasse);
+if(req.body.motdepasse != undefined){
+    console.log("je rentre")
+    const salt = await bcrypt.genSalt(10);
+    const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    try{
+        await modelPrestataires.updateOne(
+            {_id: req.params.id},
+            {$set: {nom: req.body.nom ,
+            prenom: req.body.prenom ,
+            motdepasse: motdepassehash,
+            adresse: req.body.adresse ,
+            service: req.body.service}}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}else{
+    console.log("pas de mot");
+    // const motdepassehash = req.body.motdepasse;
     try{
         await modelPrestataires.updateOne(
             {_id: req.params.id},
@@ -257,6 +320,7 @@ router.put("/:id",async (req, res) => {
     }catch(err){
         res.send(err)
     }
+}  
 })
 
 /**
@@ -332,18 +396,15 @@ router.post('/connexion', async(req, res) => {
             console.log("EMAIL PAS BON");
             return res.status(401).send('email invalide');
         }
-
-       if(req.body.motdepasse != presta.motdepasse){
+        const mdpvalide = await bcrypt.compare(req.body.motdepasse,presta.motdepasse)
+       if(!mdpvalide){
+           
         return res.status(401).send("Informations invalide");
        }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(presta);
-<<<<<<< HEAD
-    console.log(accessToken);
-=======
-    res.header('auth-token',accessToken).send(accessToken);
->>>>>>> parent of 15491453 (A merge sur le main)
     res.status(200).send(accessToken);
+    
     a = email
     // const services = await (modelservices.find({email: a}));
         // const prestataires = await modelPrestataires.find({email: a}).select(['id','nom','prenom']);
@@ -352,12 +413,11 @@ router.post('/connexion', async(req, res) => {
                 {email: a},
                 {$set: {token: accessToken }}
             );
-            res.send();
         }catch(err){
             res.send(err)
         }
-    //    res.status(201).send(accessToken);
-    
+        //res.header('auth-token',accessToken).send(accessToken);
+
     }catch (err){
       res.send(err)    
     }
