@@ -9,6 +9,11 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { find, findOne } = require("../models/prestataire");
 const prestataire = require("../models/prestataire");
+const verifieToken = require("../verifieToken");
+
+router.get('/token', async (req,res)=>{
+    verifieToken();
+})
 
 /**
  * @swagger
@@ -109,6 +114,7 @@ const prestataire = require("../models/prestataire");
  *               items:
  *                 $ref: '#/components/schemas/Prestataires'
  */
+
 
 //Selectionner tout les prestataires,  peut etre une methode de recherche par service 
 router.get('/', async (req, res) => {
@@ -216,7 +222,13 @@ router.get('/Recherche/:Prestataires', async (req, res) =>{
 
 //créer un prestataire
 router.post("/", async (req, res) => {
-    //HashPassword
+
+
+//Verifie l'email
+const emailexiste = await modelPrestataires.findOne({email : req.body.email});
+if(emailexiste) return res.status(400).send('Email existant');
+
+//HashPassword
 const salt = await bcrypt.genSalt(10);
 const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
 
@@ -364,7 +376,7 @@ router.post('/connexion', async(req, res) => {
        }
     //Generation du token si tout va bien
     const accessToken = genereAccessToken(presta);
-    console.log(accessToken);
+    res.header('auth-token',accessToken).send(accessToken);
     res.status(200).send(accessToken);
     a = email
     // const services = await (modelservices.find({email: a}));
