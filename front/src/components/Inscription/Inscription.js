@@ -6,16 +6,17 @@ export default class Inscription extends React.Component{
     super(props);
     this.registrer = this.registrer.bind(this);
   }
-  async registrer(){ 
+  async registrer(e){
+    e.preventDefault(); 
     const items = {
     nom : document.getElementById("nom").value,
     prenom : document.getElementById("prenom").value,
     motdepasse : document.getElementById("password").value,
-    date_de_naissance : "1996-12-31T00:00:00.000Z",
+    date_de_naissance : document.getElementById("email").value,
     email : document.getElementById("email").value,
     adresse :{
       rue : document.getElementById("adresse").value,
-      ville : "Evry",
+      ville :  document.getElementById("ville").value,
       codePostal : document.getElementById("code_Postale").value
   }
   }
@@ -50,7 +51,7 @@ export default class Inscription extends React.Component{
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={this.registrer}>
             <div className="rounded-md shadow-sm -space-y-px">
             <div>
                 <label htmlFor="Nom" className="sr-only">
@@ -81,8 +82,23 @@ export default class Inscription extends React.Component{
                 />
               </div>
               <div>
+                <label htmlFor="Nom" className="sr-only">
+                  Nom
+                </label>
+                <input
+                  id="date"
+                  name="date_naissance"
+                  type="date"
+                  datepicker 
+                  autoComplete="date"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Date de naissance "
+                />
+              </div>
+              <div>
                 <label htmlFor="adresse" className="sr-only">
-                  Addresse 
+                  Rue 
                 </label>
                 <input
                   id="adresse"
@@ -91,7 +107,19 @@ export default class Inscription extends React.Component{
                   autoComplete="adresse"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Adresse Postale"
+                  placeholder="Rue"
+                />
+                <label htmlFor="adresse" className="sr-only">
+                  Ville 
+                </label>
+                <input
+                  id="ville"
+                  name="ville"
+                  type="ville"
+                  autoComplete="ville"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Ville"
                 />
               </div>
               <div>
@@ -143,7 +171,7 @@ export default class Inscription extends React.Component{
            
 
             <div>
-              <button onClick={this.registrer}
+              <button type = "submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -153,7 +181,6 @@ export default class Inscription extends React.Component{
               </button>
             </div>
           </form>
-          <button onClick={this.registrer}>test</button>
         </div>
       </div>
     </>

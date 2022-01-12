@@ -1,6 +1,5 @@
 
 import React from "react";
-import CustomPopup from './Popup'
 export default class Ticket extends React.Component{
   constructor(props){
     super(props);
@@ -48,12 +47,6 @@ return(
   </td>
   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{this.props.role}</td>
   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-  <CustomPopup
-        onClose={this.popupCloseHandler}
-        show={this.visibility}
-        title="Hello Jeetendra"
-      >
-      </CustomPopup>
   </td>
 </tr>
 

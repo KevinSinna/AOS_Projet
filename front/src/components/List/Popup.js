@@ -45,7 +45,7 @@ export default function Popup() {
                     type="button"
                     onClick={() => setShowModal(false)}
                   >
-                    Close
+                    Fermer
                   </button>
                   
 

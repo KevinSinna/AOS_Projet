@@ -145,7 +145,7 @@ const datap = await data.map(async (service) => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {this.state.people.map((person) => (
-                  <Ticket email = {person.email} name ={person.name} title = {person.title} department = {person.department} role ={person.role} image={person.image}></Ticket>
+                  <Ticket email = {person.email} name ={person.name} title = {person.title} status = "Active" department = {person.department} role ={person.role} image={person.image}></Ticket>
                 ))}
               </tbody>
             </table>
