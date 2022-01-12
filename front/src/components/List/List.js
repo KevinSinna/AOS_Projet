@@ -33,15 +33,18 @@ export default class List extends React.Component {
           return Promise.reject(error);
       }
          const prestataire = await response.json();
+         console.log(service);
          return ({name: prestataire.nom + ' '+ prestataire.prenom,
          title: service.Service,
          department: prestataire.adresse.ville,
          role: 'Préstataire',
          email: prestataire.email,
          image:
-         '../../assets/img/persotest.png'
+         '../../assets/img/persotest.png',
+         Description : service.Description
          })
        })
+       console.log(datap);
        datap.map((dat)=>{
         dat.then(value => { this.setState({ people: [...this.state.people , value] })});
        })
@@ -69,7 +72,8 @@ const datap = await data.map(async (service) => {
     role: 'Préstataire',
     email: prestataire.email,
     image:
-    '../../assets/img/persotest.png'
+    '../../assets/img/persotest.png',
+    description : service.Description
     })
   })
 
@@ -145,7 +149,7 @@ const datap = await data.map(async (service) => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {this.state.people.map((person) => (
-                  <Ticket email = {person.email} name ={person.name} title = {person.title} status = "Active" department = {person.department} role ={person.role} image={person.image}></Ticket>
+                  <Ticket description ={person.Description} email = {person.email} name ={person.name} title = {person.title} status = "Active" department = {person.department} role ={person.role} image={person.image}></Ticket>
                 ))}
               </tbody>
             </table>

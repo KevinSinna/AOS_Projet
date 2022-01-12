@@ -49,11 +49,9 @@ return(
   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{this.props.role}</td>
   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
   <CustomPopup
-        onClose={this.popupCloseHandler}
-        show={this.visibility}
-        title="Hello Jeetendra"
+  name = { this.props.name} title = {this.props.title} description = {this.props.description}
       >
-      </CustomPopup>
+  </CustomPopup>
   </td>
 </tr>
 
