@@ -20,7 +20,6 @@ import rdv from './page/NouveauTicket';
 
 
 function App() {
-
   return (
   <BrowserRouter>
     <Switch>
