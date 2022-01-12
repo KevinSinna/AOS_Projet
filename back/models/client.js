@@ -13,12 +13,15 @@ const clientSchema = new mongoose.Schema({
     type:String,
     require:true
   },
+  code_postal:{
+    type: Number,
+    require:true
+  },
   date_de_naissance:{
     type: Date
   },
-  telephone:{
-    type: String,
-    require:true
+  pseudo:{
+    type: String
   },
   token:{
     type: String
@@ -37,6 +40,9 @@ const clientSchema = new mongoose.Schema({
         require:true
       }
     },
+  complement_adresse:{
+    type: String
+  },
   email:{
     type: String,
     require: true

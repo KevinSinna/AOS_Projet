@@ -21,10 +21,6 @@ const prestatairesSchema = new mongoose.Schema({
     type:String,
     require:true
   },
-  telephone:{
-    type:String,
-    require:true
-  },
   adresse:{
     rue:{
       type: String,
