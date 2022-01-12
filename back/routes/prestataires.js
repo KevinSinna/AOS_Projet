@@ -288,7 +288,27 @@ const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
 router.put("/:id",async (req, res) => {
 //Mise a jour des informations
 
-
+console.log(req.body.motdepasse);
+if(req.body.motdepasse != undefined){
+    console.log("je rentre")
+    const salt = await bcrypt.genSalt(10);
+    const motdepassehash = await bcrypt.hash(req.body.motdepasse,salt);
+    try{
+        await modelPrestataires.updateOne(
+            {_id: req.params.id},
+            {$set: {nom: req.body.nom ,
+            prenom: req.body.prenom ,
+            motdepasse: motdepassehash,
+            adresse: req.body.adresse ,
+            service: req.body.service}}
+        );
+        res.send();
+    }catch(err){
+        res.send(err)
+    }
+}else{
+    console.log("pas de mot");
+    // const motdepassehash = req.body.motdepasse;
     try{
         await modelPrestataires.updateOne(
             {_id: req.params.id},
@@ -301,6 +321,11 @@ router.put("/:id",async (req, res) => {
     }catch(err){
         res.send(err)
     }
+}
+
+
+
+   
 })
 
 /**
