@@ -10,14 +10,15 @@ const modelprestations = require('../models/prestation')
  *     Prestations:
  *       type: object
  *       required:
- *        - ClientID
  *        - PrestationsID
+ *        - ClientID
+ *        - ServiceID
  *        - service
  *        - date
  *        - adresse
  *        - code_postal
  *       properties:
- *         id:
+ *         PrestationsID::
  *           type: ObjectId
  *           description: Numéro d'identifiant prestation auto généré 
  *         ClientID:
@@ -26,9 +27,6 @@ const modelprestations = require('../models/prestation')
  *         ServiceID:
  *           type: ObjectId
  *           description: Id d'un client
- *         PrestationsID:
- *           type: ObjectId
- *           description: Id d'un prestataire
  *         service:
  *           type: string
  *           description: service rendue
