@@ -83,7 +83,7 @@ export default class Inscription extends React.Component{
               </div>
               <div>
                 <label htmlFor="Nom" className="sr-only">
-                  Nom
+                  Date de naissance
                 </label>
                 <input
                   id="date"

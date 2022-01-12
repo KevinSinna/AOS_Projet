@@ -5,53 +5,51 @@ export default class Card_reservation extends React.Component{
 
   render(props){
     return(
-
-      <form action="" method="post">
-      <div class="md:flex items-center mt-8">
-
-              <div class="md:flex items-center mt-8">
-
-          </div>    
-          </div>
-          <div class="md:flex items-center mt-12">
-              <div class="w-full md:w-1/2 flex flex-col">
-                  <label class="font-semibold leading-none">Nom </label>
-                  <input type="text" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200" />
+<>
+  <div class="flex flex-col items-center pb-10">
+			<img class="mb-3 w-24 h-24 rounded-full shadow-lg" src=""/>
+			<h3 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{this.props.name}</h3>
+			<span class="text-sm text-gray-500 dark:text-gray-400">{this.props.title}</span>
+			<div class="flex mt-4 space-x-3 lg:mt-6">
+        <div class = "flex-col">
+	
+      <p class = "front-bold">Description : {this.props.description}</p>
+      
+      <form>
+      <div>
+                <label htmlFor="Code Postale" className="sr-only">
+                  Adresse
+                </label>
+                <input
+                  id="Adresse"
+                  name="Adresse"
+                  type="Adresse"
+                  autoComplete="Adresse"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Adresse"
+                />
               </div>
-              <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
-                  <label class="font-semibold leading-none">Prenom</label>
-                  <input type="email" class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"/>
+              <div>
+                <label htmlFor="Nom" className="sr-only">
+                  Date de début
+                </label>
+                <select name="pets" id="pet-select">
+    <option >--Please choose an option--</option>
+    <option >27/01/2021</option>
+    <option >28/01/2021</option>
+    <option>15/01/2021</option>
+    <option >14/01/2021</option>
+    <option >16/01/2021</option>
+    <option >26/01/2021</option>
+</select>
               </div>
-          </div>
+              </form>
+      </div>
+		</div>
+    </div>
 
-
-          
-          <div>
-              <div class="w-full flex flex-col mt-8">
-                  <label class="font-semibold leading-none">Description de la demande</label>
-                  <textarea id="Heure de debut" type="text" class="h-40 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"></textarea>
-              </div>
-          </div>
-          <div className="mt-8 font-semibold leading-none">
-            Heure de début
-          <label class="text-gray-700" for="time">
-          <input id="Heure de fin" type="time" class="appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
-          </label>     
-          
-          </div>
-          <div className="mt-8 font-semibold leading-none">
-          Heure de fin
-          <label class="text-gray-700" for="time">
-          <input type="time" class="appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent flex-1"/>
-          </label>     
-          
-          </div>
-                      <div class="flex items-center justify-center w-full">
-              <button class="mt-9 font-semibold leading-none text-white py-4 px-10 bg-blue-700 rounded hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
-                  Prendre rendez vous
-              </button>
-          </div>
-      </form>
+  </>
     )
 
 
