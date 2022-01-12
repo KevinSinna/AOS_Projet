@@ -28,6 +28,7 @@ const { find, findOne } = require("../models/client");
  *       example:
  *         email: julius@gmail.com
  *         motdepasse : juliuspassword  
+ * 
  *     Clients:
  *       type: object
  *       required:
@@ -48,6 +49,9 @@ const { find, findOne } = require("../models/client");
  *         prenom:
  *           type: string
  *           description: Prenom du client
+ *         date_de_naissance:
+ *           type: date
+ *           description: Date de naissance du client
  *         motdepasse:
  *           type: string
  *           description: Mot de passe du client
@@ -72,9 +76,6 @@ const { find, findOne } = require("../models/client");
  *         Token:
  *           type: string
  *           description: Token du client
- *         date_de_naissance:
- *           type: date
- *           description: Date de naissance du client
  *       example:
  *         id: 78212321025
  *         nom: Amadeus
@@ -381,7 +382,7 @@ router.post('/connexion', async(req, res) => {
         }catch(err){
             res.send(err)
         }
-    //    res.status(201).send(accessToken);
+    //res.status(201).send(accessToken);
     
     }catch (err){
       res.send(err)    
