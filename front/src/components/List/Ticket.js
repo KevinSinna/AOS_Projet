@@ -1,26 +1,30 @@
 
 import React from "react";
-import Popup from './Popup'
+import CustomPopup from './Popup'
 export default class Ticket extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      showPopup: false
+      visibility: false
     };
     this.handlePops = this.handlePops.bind(this);
+    this.Setvisibility = this.Setvisibility.bind(this);
+    this.popupCloseHandler = this.popupCloseHandler.bind(this);
   }
   handlePops(){
     console.log("pops")
-    return(<Popup></Popup>
-    )
+   this.Setvisibility()
+    
   }
-  togglePopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    });
-  }
+Setvisibility(){
+  this.setState({visibility:true});
+}
+popupCloseHandler(){
+  this.setState({visibility:false});
+}
 render(props){
 return(
+  <>
   <tr key={this.props.email}>
   <td className="px-6 py-4 whitespace-nowrap">
     <div className="flex items-center">
@@ -44,11 +48,16 @@ return(
   </td>
   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{this.props.role}</td>
   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <button onClick={this.handlePops} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-      Prenez RDV
-    </button>
+  <CustomPopup
+        onClose={this.popupCloseHandler}
+        show={this.visibility}
+        title="Hello Jeetendra"
+      >
+      </CustomPopup>
   </td>
 </tr>
+
+      </>
 )
 }
 
